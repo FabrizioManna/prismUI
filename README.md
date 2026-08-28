@@ -4,6 +4,13 @@
 
 # 🧊 PrismUI
 
+<p align="center">
+  <a href="https://www.npmjs.com/package/@fabrizio.manna/prismui"><img src="https://img.shields.io/npm/v/@fabrizio.manna/prismui?color=blue" alt="NPM Version" /></a>
+  <a href="https://www.npmjs.com/package/@fabrizio.manna/prismui"><img src="https://img.shields.io/npm/dm/@fabrizio.manna/prismui" alt="Downloads" /></a>
+  <a href="https://bundlephobia.com/package/@fabrizio.manna/prismui"><img src="https://img.shields.io/bundlephobia/minzip/@fabrizio.manna/prismui" alt="Bundle Size" /></a>
+  <img src="https://img.shields.io/npm/l/@fabrizio.manna/prismui" alt="License" />
+</p>
+
 **PrismUI** is a modern, framework-agnostic UI component library designed to bring the elegance of **Glassmorphism** to enterprise admin panels and data-rich dashboards. 
 
 Built on top of standard **Web Components** using [Lit](https://lit.dev/), styled with [Tailwind CSS](https://tailwindcss.com/), and bundled with [Vite](https://vitejs.dev/), PrismUI integrates seamlessly into any frontend stack—whether you are using React, Vue, Angular, Svelte, or plain Vanilla JavaScript.
