@@ -20,6 +20,7 @@ Before writing Lit components, refresh your context on:
 - 📖 Reference: `.antygravity/rules/04-accessibility-a11y.md`
 - 📖 Reference: `.antygravity/rules/06-state-and-events.md`
 - 📖 Reference: `.antygravity/rules/17-tailwind-best-practices.md`
+- 📖 Reference: `.antygravity/rules/18-clean-code-practices.md`
 
 ## 4. Component Generation
 If asked to create a new component, you MUST NEVER guess the structure. You must use the official boilerplate template:
