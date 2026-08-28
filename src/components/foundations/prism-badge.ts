@@ -20,23 +20,25 @@ export class PrismBadge extends LitElement {
   /**
    * The status variant of the badge which determines its color scheme.
    */
-  @property({ type: String }) variant: 'success' | 'warning' | 'error' | 'info' | 'default' = 'default';
+  @property({ type: String }) variant: 'success' | 'warning' | 'danger' | 'info' | 'default' = 'default';
 
   render() {
-    let variantClasses = 'bg-slate-500/20 text-slate-700 dark:text-slate-200 border-slate-500/20'; // default
-
+    let variantClasses = '';
     switch (this.variant) {
+      case 'default':
+        variantClasses = 'bg-slate-100/50 text-slate-800 dark:bg-slate-800/50 dark:text-slate-100 border-slate-200/50 dark:border-slate-700/50';
+        break;
       case 'success':
-        variantClasses = 'bg-green-500/20 text-green-800 dark:text-green-200 border-green-500/20 shadow-[0_0_8px_rgba(34,197,94,0.2)]';
+        variantClasses = 'bg-green-600/50 text-white border-green-500/40 shadow-[0_0_8px_rgba(34,197,94,0.3)]';
         break;
       case 'warning':
-        variantClasses = 'bg-amber-500/20 text-amber-800 dark:text-amber-200 border-amber-500/20 shadow-[0_0_8px_rgba(245,158,11,0.2)]';
+        variantClasses = 'bg-yellow-500/50 text-white border-yellow-400/40 shadow-[0_0_8px_rgba(234,179,8,0.3)]';
         break;
-      case 'error':
-        variantClasses = 'bg-red-500/20 text-red-800 dark:text-red-200 border-red-500/20 shadow-[0_0_8px_rgba(239,68,68,0.2)]';
+      case 'danger':
+        variantClasses = 'bg-red-600/50 text-white border-red-500/40 shadow-[0_0_8px_rgba(239,68,68,0.3)]';
         break;
       case 'info':
-        variantClasses = 'bg-blue-500/20 text-blue-800 dark:text-blue-200 border-blue-500/20 shadow-[0_0_8px_rgba(59,130,246,0.2)]';
+        variantClasses = 'bg-blue-600/50 text-white border-blue-500/40 shadow-[0_0_8px_rgba(59,130,246,0.3)]';
         break;
     }
 

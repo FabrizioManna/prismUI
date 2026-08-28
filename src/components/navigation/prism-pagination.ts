@@ -83,10 +83,9 @@ export class PrismPagination extends LitElement {
               
               <!-- Page Numbers -->
               ${pages.map(page => {
-                const isActive = page === this.currentPage;
-                const activeClass = isActive
-                  ? 'relative z-10 inline-flex items-center bg-blue-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 shadow-[0_0_10px_rgba(37,99,235,0.4)]'
-                  : 'relative inline-flex items-center px-4 py-2 text-sm font-semibold text-slate-900 dark:text-slate-100 ring-1 ring-inset ring-slate-300/50 dark:ring-slate-600/50 hover:bg-slate-50 dark:hover:bg-slate-800 focus:z-20 focus:outline-offset-0 transition-colors';
+                const activeClass = this.currentPage === page
+                  ? 'relative z-10 inline-flex items-center bg-blue-600/50 backdrop-blur-md border border-blue-500/40 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 shadow-[0_0_10px_rgba(37,99,235,0.4)]'
+                  : 'relative inline-flex items-center px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 ring-1 ring-inset ring-slate-300/50 dark:ring-slate-600/50 hover:bg-slate-50 dark:hover:bg-slate-800 focus:z-20 focus:outline-offset-0 transition-colors';
                 
                 return html`
                   <button
