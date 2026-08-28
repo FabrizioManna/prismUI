@@ -26,3 +26,8 @@ If asked to create a new component, you MUST NEVER guess the structure. You must
 ## 5. Language
 All generated code, comments (JSDoc), variable names, and documentation must be written in **English**.
 - 📖 Reference: `.antygravity/rules/08-language-and-comments.md`
+
+## 6. Spec-Driven Development
+You must follow a Spec-Driven Development workflow. Do not write code immediately from a prompt. First, prepare a specification, break it down into smaller tasks, get approval, and log completed work in the history file.
+- 📖 Reference: `.antygravity/rules/09-spec-driven-development.md`
+- 📝 Task History: `.antygravity/task-history.md`
