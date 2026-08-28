@@ -34,6 +34,14 @@ Built on top of standard **Web Components** using [Lit](https://lit.dev/), style
 - `prism-slider`: Custom styled range sliders.
 - `prism-file-upload`: Drag-and-drop zones for file selection.
 
+### Navigation & Routing
+- `prism-sidebar`: Collapsible left navigation (expanded vs icon-only mode).
+- `prism-navbar`: Sticky top header with slots for search and actions.
+- `prism-menu` / `prism-menu-item`: Dropdown menus for profiles or generic actions.
+- `prism-tabs`: Horizontal navigation with animated active indicators.
+- `prism-breadcrumb`: Hierarchical page location display.
+- `prism-pagination`: Controls for data tables.
+
 ## 🛠️ Tech Stack
 
 - **Core:** Lit & standard Web Components

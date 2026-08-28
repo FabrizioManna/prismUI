@@ -1,7 +1,11 @@
 import { LitElement, html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import { sharedStyles } from '../../styles/shared-styles';
 
+/**
+ * A sticky top header component for Admin Dashboards.
+ * Features a Glassmorphism background and layout slots for brand, search, and user actions.
+ */
 @customElement('prism-navbar')
 export class PrismNavbar extends LitElement {
   static styles = [
@@ -9,28 +13,32 @@ export class PrismNavbar extends LitElement {
     css`
       :host {
         display: block;
-        width: 100%;
+        position: sticky;
+        top: 0;
+        z-index: 40; /* High enough to stay above content, below modals/dropdowns (50+) */
       }
     `
   ];
 
-  @property({ type: String }) title = 'Dashboard';
-
   render() {
     return html`
-      <header class="w-full h-16 bg-white/30 dark:bg-slate-900/60 backdrop-blur-md border-b border-slate-200/30 dark:border-slate-700/50 px-6 flex items-center justify-between shadow-sm z-10 relative">
+      <header class="w-full h-16 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-700/50 flex items-center justify-between px-4 sm:px-6 shadow-sm">
+        
+        <!-- Left: Brand / Mobile Toggle -->
         <div class="flex items-center gap-4">
           <slot name="left"></slot>
-          <h1 class="text-xl font-semibold text-slate-800 dark:text-slate-100">${this.title}</h1>
         </div>
-        
-        <div class="flex items-center gap-4">
+
+        <!-- Center: Search (optional) -->
+        <div class="flex-1 max-w-2xl px-4 hidden md:flex items-center justify-center">
           <slot name="center"></slot>
         </div>
 
-        <div class="flex items-center gap-4">
+        <!-- Right: Actions, Notifications, User Menu -->
+        <div class="flex items-center gap-3">
           <slot name="right"></slot>
         </div>
+
       </header>
     `;
   }

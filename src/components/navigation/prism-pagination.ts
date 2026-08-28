@@ -1,0 +1,124 @@
+import { LitElement, html, css } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import { sharedStyles } from '../../styles/shared-styles';
+
+/**
+ * Pagination component for data tables.
+ */
+@customElement('prism-pagination')
+export class PrismPagination extends LitElement {
+  static styles = [
+    sharedStyles,
+    css`
+      :host {
+        display: block;
+      }
+    `
+  ];
+
+  /**
+   * Current active page (1-indexed).
+   */
+  @property({ type: Number }) currentPage = 1;
+
+  /**
+   * Total number of pages.
+   */
+  @property({ type: Number }) totalPages = 1;
+
+  private _goToPage(page: number) {
+    if (page < 1 || page > this.totalPages || page === this.currentPage) return;
+    this.currentPage = page;
+    this.dispatchEvent(new CustomEvent('page-change', { detail: { page: this.currentPage } }));
+  }
+
+  private _prev() {
+    this._goToPage(this.currentPage - 1);
+  }
+
+  private _next() {
+    this._goToPage(this.currentPage + 1);
+  }
+
+  render() {
+    // Generate page numbers to show (simple logic: show all for now, or just a window)
+    // For a real component, you'd calculate a window like [1, '...', 4, 5, 6, '...', 10]
+    // Here we'll do a simple window around current page
+    const pages = [];
+    const maxVisible = 5;
+    
+    let startPage = Math.max(1, this.currentPage - Math.floor(maxVisible / 2));
+    let endPage = Math.min(this.totalPages, startPage + maxVisible - 1);
+    
+    if (endPage - startPage + 1 < maxVisible) {
+      startPage = Math.max(1, endPage - maxVisible + 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i);
+    }
+
+    return html`
+      <div class="flex items-center justify-between px-4 py-3 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md border border-slate-200/50 dark:border-slate-700/50 sm:px-6 rounded-lg">
+        <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+          <div>
+            <p class="text-sm text-slate-700 dark:text-slate-300">
+              Showing page <span class="font-medium">${this.currentPage}</span> of <span class="font-medium">${this.totalPages}</span>
+            </p>
+          </div>
+          
+          <div>
+            <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
+              <!-- Previous Button -->
+              <button
+                @click="${this._prev}"
+                ?disabled="${this.currentPage === 1}"
+                class="relative inline-flex items-center rounded-l-md px-2 py-2 text-slate-400 dark:text-slate-500 ring-1 ring-inset ring-slate-300/50 dark:ring-slate-600/50 hover:bg-slate-50 dark:hover:bg-slate-800 focus:z-20 focus:outline-offset-0 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                <span class="sr-only">Previous</span>
+                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" />
+                </svg>
+              </button>
+              
+              <!-- Page Numbers -->
+              ${pages.map(page => {
+                const isActive = page === this.currentPage;
+                const activeClass = isActive
+                  ? 'relative z-10 inline-flex items-center bg-blue-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 shadow-[0_0_10px_rgba(37,99,235,0.4)]'
+                  : 'relative inline-flex items-center px-4 py-2 text-sm font-semibold text-slate-900 dark:text-slate-100 ring-1 ring-inset ring-slate-300/50 dark:ring-slate-600/50 hover:bg-slate-50 dark:hover:bg-slate-800 focus:z-20 focus:outline-offset-0 transition-colors';
+                
+                return html`
+                  <button
+                    @click="${() => this._goToPage(page)}"
+                    class="${activeClass}"
+                  >
+                    ${page}
+                  </button>
+                `;
+              })}
+              
+              <!-- Next Button -->
+              <button
+                @click="${this._next}"
+                ?disabled="${this.currentPage === this.totalPages}"
+                class="relative inline-flex items-center rounded-r-md px-2 py-2 text-slate-400 dark:text-slate-500 ring-1 ring-inset ring-slate-300/50 dark:ring-slate-600/50 hover:bg-slate-50 dark:hover:bg-slate-800 focus:z-20 focus:outline-offset-0 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                <span class="sr-only">Next</span>
+                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
+                </svg>
+              </button>
+            </nav>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'prism-pagination': PrismPagination;
+  }
+}

@@ -18,6 +18,11 @@ export { PrismFileUpload } from './components/form/prism-file-upload';
 // Navigation Components
 export { PrismSidebar } from './components/navigation/prism-sidebar';
 export { PrismNavbar } from './components/navigation/prism-navbar';
+export { PrismMenu } from './components/navigation/prism-menu';
+export { PrismMenuItem } from './components/navigation/prism-menu-item';
+export { PrismTabs } from './components/navigation/prism-tabs';
+export { PrismBreadcrumb } from './components/navigation/prism-breadcrumb';
+export { PrismPagination } from './components/navigation/prism-pagination';
 export { PrismAccordion } from './components/navigation/prism-accordion';
 
 // Layout & Data Components
