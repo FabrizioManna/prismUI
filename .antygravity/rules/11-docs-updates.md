@@ -1,8 +1,8 @@
-# Rule: Documentation Updates
+# Rule: Storybook Documentation Updates
 
-Whenever a new component is created or an existing component is significantly modified, you **MUST** automatically update the corresponding documentation files in the `docs/components/` directory without waiting for explicit user prompts.
+Whenever a new component is created, you **MUST** automatically create a `.stories.ts` file alongside it (e.g. `prism-button.stories.ts`) without waiting for explicit user prompts.
 
 ## Guidelines
-1. **Identify the Category**: Determine if the component belongs to Form (`form.md`), Navigation (`navigation.md`), or Layout/Overlays (`layout.md`).
-2. **Update the List**: Ensure the component name is added to the "Available Components" list.
-3. **Keep it Synced**: The VitePress documentation (`docs/`) must always reflect the current state of the `src/components/` directory and the main `README.md`.
+1. **Custom Elements Manifest**: We use `@custom-elements-manifest/analyzer` which runs automatically before Storybook starts. This parses all `@property`, `@state`, and JSDoc comments to generate API tables.
+2. **Write Good JSDoc**: Because of the analyzer, it is strictly mandatory to write detailed JSDoc comments for the class, and every `@property`.
+3. **Basic Story**: Every component must have a default story that exports its typical usage. You do not need to document the API manually in the story, Storybook does it automatically via `custom-elements.json`.
