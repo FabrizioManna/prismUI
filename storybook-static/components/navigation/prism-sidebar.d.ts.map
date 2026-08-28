@@ -1,0 +1,1 @@
+{"version":3,"file":"prism-sidebar.d.ts","sourceRoot":"","sources":["../../../src/components/navigation/prism-sidebar.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,UAAU,EAAa,MAAM,KAAK,CAAC;AAI5C;;;GAGG;AACH,qBACa,YAAa,SAAQ,UAAU;IAC1C,MAAM,CAAC,MAAM,4BAsBX;IAEF;;OAEG;IAC0B,SAAS,UAAS;IAE/C,MAAM;CAuBP;AAED,OAAO,CAAC,MAAM,CAAC;IACb,UAAU,qBAAqB;QAC7B,eAAe,EAAE,YAAY,CAAC;KAC/B;CACF"}
