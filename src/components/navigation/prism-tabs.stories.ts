@@ -13,7 +13,7 @@ type Story = StoryObj;
 
 export const Default: Story = {
   args: {},
-  render: (args) => html`
+  render: () => html`
     <prism-tabs></prism-tabs>
   `,
 };

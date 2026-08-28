@@ -1,0 +1,129 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Introduction" />
+
+# 💎 PrismUI
+
+> The Ultimate Glassmorphism Web Component Library
+
+**PrismUI** is a modern, framework-agnostic UI component library designed to bring the elegance of **Glassmorphism** to enterprise admin panels and data-rich dashboards. Built with standard Web Components (Lit) and TailwindCSS, it runs universally across any frontend ecosystem.
+
+<br />
+
+## 📦 Installation
+
+To install PrismUI in your project, simply use NPM:
+
+```bash
+npm install prismui
+```
+
+PrismUI utilizes [Lucide](https://lucide.dev/) for its rich iconography. Ensure you have the static package installed if you are rendering icons manually:
+```bash
+npm install lucide-static
+```
+
+<br />
+
+## 🚀 Usage Guide
+
+Because PrismUI is built natively on standard Web Components (`customElements`), it works directly in the browser and integrates seamlessly with any modern JavaScript framework.
+
+---
+
+### 🌐 Vanilla JS / HTML
+Simply import the components you need, and they will auto-register as custom HTML elements.
+
+```html
+<script type="module">
+  // Import the entire library
+  import 'prismui/dist/prismui.es.js';
+  
+  // Or import specific components for tree-shaking
+  import 'prismui/src/components/foundations/prism-button';
+</script>
+
+<body class="bg-gray-900 text-white">
+  <prism-button variant="primary" size="md">Click Me</prism-button>
+</body>
+```
+
+---
+
+### ⚛️ React
+Custom elements are natively supported in React 19+. For complex event listeners (`@events`) in older React versions, you can use the `@lit/react` wrapper, but for standard properties, native HTML tags work perfectly.
+
+```tsx
+import React from 'react';
+import 'prismui/src/components/foundations/prism-button';
+
+export default function App() {
+  return (
+    <div className="p-10">
+      <prism-button variant="primary">Submit Data</prism-button>
+    </div>
+  );
+}
+```
+
+---
+
+### 💚 Vue 3
+Vue 3 has excellent, native support for Web Components. You just need to tell the Vue compiler to ignore components starting with `prism-` so it doesn't try to resolve them as Vue components.
+
+**vite.config.ts**
+```typescript
+import vue from '@vitejs/plugin-vue'
+
+export default {
+  plugins: [
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) => tag.startsWith('prism-')
+        }
+      }
+    })
+  ]
+}
+```
+
+**App.vue**
+```vue
+<script setup>
+  import 'prismui/src/components/foundations/prism-button';
+</script>
+
+<template>
+  <prism-button variant="secondary">Cancel</prism-button>
+</template>
+```
+
+---
+
+### 🅰️ Angular
+To use Web Components in Angular, simply add `CUSTOM_ELEMENTS_SCHEMA` to your module.
+
+```typescript
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+
+// Import PrismUI components
+import 'prismui/src/components/foundations/prism-button';
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA], // <-- Extremely important!
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+<br />
+
+## 🎨 Theming & Glassmorphism
+PrismUI does not rely on solid background colors. Every component uses semi-transparent backgrounds (`bg-white/10`, `bg-black/20`), background blurs (`backdrop-blur-md`), and subtle borders (`border-white/20`).
+
+To ensure components are visible, **your application must have an underlying background** (a gradient, an image, or a dark solid color like `#0f172a`). Placing PrismUI components on a pure white background will render them nearly invisible by design.
