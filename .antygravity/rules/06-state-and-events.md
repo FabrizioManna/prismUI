@@ -18,3 +18,10 @@
 
 3. **Boolean Properties**:
    - For boolean attributes (e.g., `disabled`, `loading`, `checked`), always configure the property as `@property({ type: Boolean, reflect: true })`. This ensures the HTML attribute is updated alongside the JavaScript state, which is crucial for CSS attribute selectors.
+
+4. **Stateless Design by Default**:
+   - Components should be as stateless (presentational) as possible. Avoid maintaining internal state for things that can be passed down as parameters.
+   - Rely strictly on `@property()` to read data from the parent, and dispatch events to let the parent handle the logic.
+
+5. **CSS Class Injection**:
+   - Always provide a way to pass external classes to the component's internal elements. Use a property like `@property({ type: String }) customClass = '';` and apply it to the main inner wrapper using `classMap` or template literals, or expose CSS `part` attributes on key elements.
