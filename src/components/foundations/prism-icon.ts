@@ -1,10 +1,11 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 import { sharedStyles } from '../../styles/shared-styles';
 
 /**
  * A lightweight SVG wrapper component that inherits the current text color.
- * Designed to be framework-agnostic by accepting raw SVG path strings or utilizing the default slot.
+ * Accepts raw SVG string from lucide-static or utilizes the default slot.
  */
 @customElement('prism-icon')
 export class PrismIcon extends LitElement {
@@ -16,7 +17,13 @@ export class PrismIcon extends LitElement {
         align-items: center;
         justify-content: center;
       }
+      /* If using raw svg strings (like from lucide-static), ensure they scale */
       svg {
+        width: 100%;
+        height: 100%;
+      }
+      /* Fallback for slotted content */
+      ::slotted(svg) {
         fill: none;
         stroke: currentColor;
         stroke-width: 2;
@@ -32,22 +39,27 @@ export class PrismIcon extends LitElement {
   @property({ type: Number }) size = 24;
 
   /**
-   * A string containing the raw SVG inner content (e.g., `<path d="..." />`).
-   * If provided, this will be rendered inside the SVG. Otherwise, the default `<slot>` is used.
+   * A string containing the raw full SVG element (e.g. from lucide-static).
    */
-  @property({ type: String }) content = '';
+  @property({ type: String }) icon = '';
 
   render() {
     return html`
-      <svg 
-        width="${this.size}" 
-        height="${this.size}" 
-        viewBox="0 0 24 24" 
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-      >
-        ${this.content ? html([this.content] as any) : html`<slot></slot>`}
-      </svg>
+      <div style="width: ${this.size}px; height: ${this.size}px; display: inline-flex;">
+        ${this.icon 
+          ? unsafeSVG(this.icon) 
+          : html`
+            <svg 
+              width="${this.size}" 
+              height="${this.size}" 
+              viewBox="0 0 24 24" 
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <slot></slot>
+            </svg>
+          `}
+      </div>
     `;
   }
 }

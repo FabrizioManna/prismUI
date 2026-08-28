@@ -7,7 +7,7 @@ hero:
   text: "A Framework-Agnostic Glassmorphism UI Kit"
   tagline: Modern, elegant, and encapsulated Web Components for data-rich Admin Dashboards.
   image:
-    src: /logo.png
+    src: /logo.jpg
     alt: PrismUI Logo
   actions:
     - theme: brand

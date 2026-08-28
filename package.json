@@ -15,8 +15,16 @@
     "type": "git",
     "url": "git+https://github.com/FabrizioManna/prismUI.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "ui",
+    "components",
+    "lit",
+    "web-components",
+    "glassmorphism",
+    "tailwind",
+    "prismui"
+  ],
+  "author": "Fabrizio Manna",
   "license": "ISC",
   "type": "module",
   "engines": {

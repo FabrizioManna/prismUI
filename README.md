@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./docs/public/logo.png" alt="PrismUI Logo" width="300" />
+  <img src="./docs/public/logo.jpg" alt="PrismUI Logo" width="300" />
 </div>
 
 # 🧊 PrismUI
@@ -49,6 +49,13 @@ Built on top of standard **Web Components** using [Lit](https://lit.dev/), style
 - `prism-stat`: Dashboard metric cards with trend indicators.
 - `prism-progress`: Linear progress bars with glowing gradients.
 - `prism-tooltip`: Hover tooltip for extra contextual info.
+
+### Overlays & Feedback
+- `prism-modal`: Centered dialog overlays with frosted backdrops.
+- `prism-drawer`: Slide-out off-canvas panels for side content.
+- `prism-toast`: Floating snackbar notifications (success, error, etc.).
+- `prism-alert`: In-page static alert banners.
+- `prism-spinner`: Animated glowing loading indicator.
 
 ## 🛠️ Tech Stack
 

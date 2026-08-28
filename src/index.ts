@@ -32,5 +32,12 @@ export { PrismTable } from './components/layout/prism-table';
 export { PrismProgress } from './components/layout/prism-progress';
 export { PrismTooltip } from './components/layout/prism-tooltip';
 
+// Overlays & Feedback Components
+export { PrismModal } from './components/overlays/prism-modal';
+export { PrismDrawer } from './components/overlays/prism-drawer';
+export { PrismToast } from './components/overlays/prism-toast';
+export { PrismAlert } from './components/overlays/prism-alert';
+export { PrismSpinner } from './components/overlays/prism-spinner';
+
 // Styles Exporter (Optional, if consumers want to use the shared styles directly)
 export { sharedStyles } from './styles/shared-styles';
