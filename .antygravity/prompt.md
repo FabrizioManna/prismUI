@@ -36,3 +36,7 @@ You must follow a Spec-Driven Development workflow. Do not write code immediatel
 The main `README.md` and the VitePress documentation in `docs/` must be kept strictly up to date without waiting for user prompts whenever new components are built or architectural changes occur.
 - 📖 Reference: `.antygravity/rules/10-readme-updates.md`
 - 📖 Reference: `.antygravity/rules/11-docs-updates.md`
+
+## 8. Dependency Management
+Whenever a dependency is removed, all references to it (code, scripts, CI/CD, config files) must be fully scrubbed from the project.
+- 📖 Reference: `.antygravity/rules/12-dependency-cleanup.md`
