@@ -27,6 +27,8 @@ export class PrismNavbar extends LitElement {
         <!-- Left: Brand / Mobile Toggle -->
         <div class="flex items-center gap-4">
           <slot name="left"></slot>
+          <!-- Mobile Menu Trigger slot (optional) -->
+          <slot name="mobile-trigger" class="md:hidden"></slot>
         </div>
 
         <!-- Center: Search (optional) -->

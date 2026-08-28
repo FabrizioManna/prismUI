@@ -33,24 +33,24 @@ export class PrismCard extends LitElement {
   @property({ type: Boolean, attribute: 'no-padding' }) noPadding = false;
 
   render() {
-    const paddingClass = this.noPadding ? 'p-0' : 'p-6';
+    const paddingClass = this.noPadding ? 'p-0' : 'px-4 py-4 sm:px-6 sm:py-5';
 
     return html`
       <div class="prism-glass flex flex-col h-full transition-shadow hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_8px_32px_rgba(0,0,0,0.24)]">
         
         ${this.title || this.subtitle || this.querySelector('[slot="header"]') ? html`
-          <div class="px-6 py-5 border-b border-slate-300/40 dark:border-slate-600/50 bg-white/30 dark:bg-slate-800/40">
+          <div class="px-4 py-4 sm:px-6 sm:py-5 border-b border-slate-300/40 dark:border-slate-600/50 bg-white/30 dark:bg-slate-800/40">
             <div class="flex justify-between items-center gap-4">
               <div class="flex-1">
                 ${this.title ? html`<h3 class="text-lg font-semibold text-slate-800 dark:text-slate-100">${this.title}</h3>` : ''}
-                ${this.subtitle ? html`<p class="text-sm text-slate-500 dark:text-slate-400 mt-1">${this.subtitle}</p>` : ''}
+                ${this.subtitle ? html`<p class="mt-1 text-sm text-slate-500 dark:text-slate-400">${this.subtitle}</p>` : ''}
               </div>
               <slot name="header"></slot>
             </div>
           </div>
         ` : ''}
         
-        <div class="${paddingClass} flex-1 flex flex-col relative z-10">
+        <div class="${paddingClass} flex-1 flex flex-col relative z-10 text-slate-700 dark:text-slate-300">
           <slot></slot>
         </div>
 

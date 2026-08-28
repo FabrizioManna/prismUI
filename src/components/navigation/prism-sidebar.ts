@@ -41,7 +41,7 @@ export class PrismSidebar extends LitElement {
     const widthClass = this.collapsed ? 'w-20' : 'w-64';
 
     return html`
-      <aside class="prism-glass h-full ${widthClass} !rounded-none transition-all duration-300 ease-in-out flex flex-col">
+      <aside class="prism-glass h-full ${widthClass} !rounded-none transition-all duration-300 ease-in-out hidden md:flex flex-col">
         
         <!-- Brand / Logo Area -->
         <div class="h-16 flex items-center justify-center border-b border-slate-200/50 dark:border-slate-700/50 shrink-0">

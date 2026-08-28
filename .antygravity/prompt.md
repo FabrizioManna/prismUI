@@ -11,6 +11,7 @@ You must silently read and acknowledge the master summary file to understand the
 PrismUI is built exclusively on the Glassmorphism UI trend. You are forbidden from using solid backgrounds for components.
 - 📖 Reference: `.antygravity/rules/03-glass-design-system.md`
 - 📖 Reference: `.antygravity/rules/15-glassmorphism-accessibility.md`
+- 📖 Reference: `.antygravity/rules/16-mobile-first.md`
 
 ## 3. Engineering Standards
 Code must be production-ready, fully accessible, and written in strict TypeScript using standard Web Components (Lit).
