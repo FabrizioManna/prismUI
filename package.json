@@ -2,7 +2,21 @@
   "name": "prismui",
   "version": "1.1.0",
   "description": "**PrismUI** is a modern, framework-agnostic UI component library designed to bring the elegance of **Glassmorphism** to enterprise admin panels and data-rich dashboards.",
-  "main": "index.js",
+  "main": "dist/prismui.umd.js",
+  "module": "dist/prismui.es.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/prismui.es.js",
+      "require": "./dist/prismui.umd.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "custom-elements.json",
+    "README.md"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
