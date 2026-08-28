@@ -34,10 +34,10 @@ export class PrismAccordion extends LitElement {
 
   render() {
     return html`
-      <div class="border border-slate-300/40 dark:border-slate-600/50 rounded-xl overflow-hidden bg-white/30 dark:bg-slate-800/40 backdrop-blur-md mb-3 transition-colors duration-200 hover:bg-white/50 dark:hover:bg-slate-800/60">
+      <div class="prism-glass rounded-xl overflow-hidden mb-3 transition-colors duration-200">
         <button
           @click="${this._toggle}"
-          class="w-full flex items-center justify-between px-6 py-4 text-left outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-inset"
+          class="w-full flex items-center justify-between px-6 py-4 text-left outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-inset hover:bg-white/10 dark:hover:bg-slate-800/30 transition-colors"
           aria-expanded="${this.open}"
         >
           <span class="font-medium text-slate-800 dark:text-slate-200">${this.title}</span>
