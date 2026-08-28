@@ -40,3 +40,7 @@ The main `README.md` and the VitePress documentation in `docs/` must be kept str
 ## 8. Dependency Management
 Whenever a dependency is removed, all references to it (code, scripts, CI/CD, config files) must be fully scrubbed from the project.
 - 📖 Reference: `.antygravity/rules/12-dependency-cleanup.md`
+
+## 9. NPM & Security
+Never use `npm audit fix --force`. Dev dependency vulnerabilities should be managed surgically using `overrides`, not brute-force commands.
+- 📖 Reference: `.antygravity/rules/13-npm-audit-policy.md`
