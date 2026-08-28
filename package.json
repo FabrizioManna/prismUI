@@ -1,12 +1,13 @@
 {
   "name": "prismui",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "**PrismUI** is a modern, framework-agnostic UI component library designed to bring the elegance of **Glassmorphism** to enterprise admin panels and data-rich dashboards.",
   "main": "index.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "analyze": "cem analyze --litelement --outdir .",
+    "scaffold:stories": "node scripts/generate-stories.js",
     "storybook": "npm run analyze && storybook dev -p 6006",
     "build-storybook": "npm run analyze && storybook build",
     "test": "echo \"Error: no test specified\" && exit 1"
