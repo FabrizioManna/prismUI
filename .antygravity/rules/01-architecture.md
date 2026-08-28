@@ -1,7 +1,7 @@
 # Architecture Rule: PrismUI
 
 PrismUI is a framework-agnostic UI component library built for modern Admin Panels and Dashboards.
-- **Core Technology**: Lit (`lit`) with TypeScript.
+- **Core Technology**: Lit (`lit`) with TypeScript. Requires **Node 26+**.
 - **Styling**: Tailwind CSS v3 via Vite inline imports.
 - **Build Tool**: Vite (library mode).
 - **Design System**: Glassmorphism.
