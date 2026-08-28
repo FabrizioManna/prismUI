@@ -34,7 +34,7 @@ export class PrismAccordion extends LitElement {
 
   render() {
     return html`
-      <div class="prism-glass rounded-xl overflow-hidden mb-3 transition-colors duration-200">
+      <div class="prism-glass border border-slate-300/50 dark:border-slate-600/60 shadow-sm rounded-xl overflow-hidden mb-3 transition-colors duration-200">
         <button
           @click="${this._toggle}"
           class="w-full flex items-center justify-between px-6 py-4 text-left outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-inset hover:bg-white/10 dark:hover:bg-slate-800/30 transition-colors"
