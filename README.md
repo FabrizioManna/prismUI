@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./docs/public/logo-bkg.png" alt="PrismUI Logo" width="300" />
+  <img src="./images/logo-bkg.png" alt="PrismUI Logo" width="300" />
 </div>
 
 # 🧊 PrismUI
