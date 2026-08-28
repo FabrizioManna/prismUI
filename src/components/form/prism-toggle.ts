@@ -2,47 +2,75 @@ import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { sharedStyles } from '../../styles/shared-styles';
 
+/**
+ * A smooth, animated switch for boolean settings (on/off) styled with Glassmorphism.
+ * Fully accessible via keyboard and screen readers.
+ */
 @customElement('prism-toggle')
 export class PrismToggle extends LitElement {
   static styles = [
     sharedStyles,
     css`
       :host {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
       }
     `
   ];
 
+  /**
+   * The current checked state of the toggle.
+   */
   @property({ type: Boolean }) checked = false;
-  @property({ type: Boolean }) disabled = false;
-  @property({ type: String }) label = '';
 
-  private _toggle() {
+  /**
+   * Disables the toggle.
+   */
+  @property({ type: Boolean }) disabled = false;
+
+  /**
+   * Accessible label for the toggle.
+   */
+  @property({ type: String }) ariaLabel = 'Toggle switch';
+
+  private _toggle(e: Event) {
     if (this.disabled) return;
+    e.preventDefault();
     this.checked = !this.checked;
-    this.dispatchEvent(new CustomEvent('prism-toggle', {
-      detail: { checked: this.checked },
-      bubbles: true,
-      composed: true
-    }));
+    this.dispatchEvent(new CustomEvent('change', { detail: { checked: this.checked } }));
+  }
+
+  private _handleKeyDown(e: KeyboardEvent) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      this._toggle(e);
+    }
   }
 
   render() {
+    const disabledClass = this.disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer';
+    const trackClass = this.checked
+      ? 'bg-blue-500/60 border-blue-400/50 shadow-[0_0_12px_rgba(59,130,246,0.3)]'
+      : 'bg-slate-300/30 dark:bg-slate-700/50 border-slate-400/30 dark:border-slate-500/30';
+    
+    const thumbPositionClass = this.checked ? 'translate-x-5' : 'translate-x-1';
+
     return html`
-      <label class="flex items-center gap-3 ${this.disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}">
-        <div class="relative">
-          <input 
-            type="checkbox" 
-            class="sr-only" 
-            .checked=${this.checked} 
-            ?disabled=${this.disabled}
-            @change=${this._toggle}
-          >
-          <div class="block w-10 h-6 rounded-full transition-colors duration-300 ${this.checked ? 'bg-blue-500/80 shadow-[0_0_10px_rgba(59,130,246,0.5)]' : 'bg-slate-300/40 dark:bg-slate-700/50'} backdrop-blur-sm border border-white/20"></div>
-          <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-300 shadow-sm ${this.checked ? 'transform translate-x-4' : ''}"></div>
-        </div>
-        ${this.label ? html`<span class="text-sm font-medium text-slate-700 dark:text-slate-300">${this.label}</span>` : ''}
-      </label>
+      <button
+        type="button"
+        role="switch"
+        aria-checked="${this.checked}"
+        aria-label="${this.ariaLabel}"
+        ?disabled="${this.disabled}"
+        @click="${this._toggle}"
+        @keydown="${this._handleKeyDown}"
+        class="relative inline-flex h-6 w-11 flex-shrink-0 items-center rounded-full border transition-colors duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:ring-offset-2 backdrop-blur-sm ${disabledClass} ${trackClass}"
+      >
+        <span
+          aria-hidden="true"
+          class="pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-300 ease-in-out ${thumbPositionClass}"
+        ></span>
+      </button>
     `;
   }
 }

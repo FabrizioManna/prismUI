@@ -1,3 +1,8 @@
+// Foundations Components
+export { PrismIcon } from './components/foundations/prism-icon';
+export { PrismBadge } from './components/foundations/prism-badge';
+export { PrismAvatar } from './components/foundations/prism-avatar';
+
 // Form Components
 export { PrismButton } from './components/form/prism-button';
 export { PrismInput } from './components/form/prism-input';
