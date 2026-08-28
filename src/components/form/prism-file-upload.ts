@@ -99,8 +99,8 @@ export class PrismFileUpload extends LitElement {
   render() {
     const disabledClass = this.disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer';
     const dragClass = this._isDragging 
-      ? 'border-blue-400 bg-blue-500/10 shadow-[0_0_15px_rgba(59,130,246,0.2)]' 
-      : 'border-slate-300/40 dark:border-slate-600/50 bg-white/10 dark:bg-slate-800/20 hover:bg-white/20 dark:hover:bg-slate-800/30';
+      ? 'border-blue-400 bg-blue-500/10 shadow-[0_0_15px_rgba(59,130,246,0.3)]' 
+      : 'border-slate-400/40 dark:border-slate-500/40 hover:bg-slate-100/30 dark:hover:bg-slate-800/30';
 
     return html`
       <div class="w-full">

@@ -52,8 +52,8 @@ export class PrismStat extends LitElement {
       <div class="prism-glass p-6 flex items-start justify-between group transition-transform hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)]">
         
         <div>
-          <p class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">${this.title}</p>
-          <h3 class="text-3xl font-bold text-slate-800 dark:text-slate-100 tracking-tight">${this.value}</h3>
+          <p class="text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">${this.title}</p>
+          <h3 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">${this.value}</h3>
           
           ${this.trend ? html`
             <div class="flex items-center mt-2 text-sm font-medium ${trendColorClass}">

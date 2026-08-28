@@ -39,12 +39,12 @@ export class PrismProgress extends LitElement {
       <div class="w-full">
         ${this.label ? html`
           <div class="flex justify-between items-center mb-1.5">
-            <span class="text-sm font-medium text-slate-700 dark:text-slate-300">${this.label}</span>
-            <span class="text-sm font-medium text-slate-500 dark:text-slate-400">${Math.round(percentage)}%</span>
+            <span class="text-sm font-medium text-slate-900 dark:text-white">${this.label}</span>
+            <span class="text-sm font-medium text-slate-700 dark:text-slate-200">${Math.round(percentage)}%</span>
           </div>
         ` : ''}
         
-        <div class="w-full h-2.5 bg-slate-200/50 dark:bg-slate-700/50 rounded-full overflow-hidden backdrop-blur-sm border border-slate-300/30 dark:border-slate-600/30">
+        <div class="w-full h-2.5 bg-slate-300/40 dark:bg-slate-700/50 rounded-full overflow-hidden backdrop-blur-sm border border-slate-400/30 dark:border-slate-600/40">
           <div 
             class="h-full rounded-full transition-all duration-500 ease-out bg-gradient-to-r from-blue-500 to-indigo-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]"
             style="width: ${percentage}%"

@@ -110,8 +110,8 @@ export class PrismToast extends LitElement {
             <prism-icon .icon="${iconSvg}" size="20"></prism-icon>
           </div>
           <div class="ml-3 w-0 flex-1 pt-0.5">
-            ${this.title ? html`<p class="text-sm font-semibold text-slate-800 dark:text-slate-100">${this.title}</p>` : ''}
-            ${this.description ? html`<p class="mt-1 text-sm text-slate-500 dark:text-slate-400 leading-relaxed">${this.description}</p>` : ''}
+            ${this.title ? html`<p class="text-sm font-semibold text-slate-900 dark:text-white">${this.title}</p>` : ''}
+            ${this.description ? html`<p class="mt-1 text-sm text-slate-700 dark:text-slate-200 leading-relaxed">${this.description}</p>` : ''}
             <slot></slot>
           </div>
           <div class="ml-4 flex flex-shrink-0">

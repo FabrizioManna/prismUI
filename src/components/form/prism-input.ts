@@ -72,7 +72,7 @@ export class PrismInput extends LitElement {
       borderClass = 'border-red-500/60 focus:border-red-500/80 focus:ring-red-500/30 shadow-[0_0_8px_rgba(239,68,68,0.2)]';
     }
 
-    const disabledClass = this.disabled ? 'opacity-50 cursor-not-allowed bg-slate-100/10' : 'bg-white/10 dark:bg-slate-800/20';
+    const disabledClass = this.disabled ? 'opacity-50 cursor-not-allowed bg-slate-200/20' : 'bg-white/30 dark:bg-slate-800/40';
 
     return html`
       <div class="relative w-full">

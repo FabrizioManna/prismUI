@@ -39,7 +39,7 @@ export class PrismCard extends LitElement {
       <div class="prism-glass flex flex-col h-full transition-shadow hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_8px_32px_rgba(0,0,0,0.24)]">
         
         ${this.title || this.subtitle || this.querySelector('[slot="header"]') ? html`
-          <div class="px-6 py-5 border-b border-slate-200/50 dark:border-slate-700/50 bg-white/20 dark:bg-slate-800/20">
+          <div class="px-6 py-5 border-b border-slate-300/40 dark:border-slate-600/50 bg-white/30 dark:bg-slate-800/40">
             <div class="flex justify-between items-center gap-4">
               <div class="flex-1">
                 ${this.title ? html`<h3 class="text-lg font-semibold text-slate-800 dark:text-slate-100">${this.title}</h3>` : ''}

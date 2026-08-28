@@ -110,7 +110,7 @@ export class PrismTable extends LitElement {
         <div class="overflow-x-auto">
           <table class="w-full text-left border-collapse">
             <thead>
-              <tr class="bg-slate-50/60 dark:bg-slate-800/60 border-b border-slate-200/40 dark:border-slate-700/50 text-slate-600 dark:text-slate-300 text-xs uppercase tracking-wider font-semibold">
+              <tr class="bg-slate-100/40 dark:bg-slate-800/50 border-b border-slate-300/40 dark:border-slate-600/50 text-slate-800 dark:text-white text-xs uppercase tracking-wider font-semibold">
                 
                 ${this.selectable ? html`
                   <th class="px-6 py-4 w-12 text-center">

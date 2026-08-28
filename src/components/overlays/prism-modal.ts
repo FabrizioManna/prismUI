@@ -55,7 +55,7 @@ export class PrismModal extends LitElement {
         <div class="prism-glass relative w-full max-w-lg flex flex-col transform transition-all duration-300 scale-100 opacity-100 animate-in fade-in zoom-in-95">
           
           <!-- Header -->
-          <div class="flex items-center justify-between px-6 py-4 border-b border-slate-200/50 dark:border-slate-700/50">
+          <div class="flex items-center justify-between px-6 py-4 border-b border-slate-300/40 dark:border-slate-600/50">
             <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-100">
               ${this.title}
               <slot name="header"></slot>

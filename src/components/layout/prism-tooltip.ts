@@ -66,7 +66,7 @@ export class PrismTooltip extends LitElement {
         <slot></slot>
         
         <div 
-          class="absolute z-50 whitespace-nowrap px-3 py-1.5 text-xs font-medium text-white bg-slate-800/90 dark:bg-slate-700/90 backdrop-blur-md rounded-md shadow-lg pointer-events-none transition-all duration-200 ${placementClass} ${this._visible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}"
+          class="absolute z-50 whitespace-nowrap px-3 py-1.5 text-xs font-medium text-white bg-slate-900/90 dark:bg-slate-800/90 backdrop-blur-md rounded-md shadow-lg pointer-events-none transition-all duration-200 ${placementClass} ${this._visible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}"
           role="tooltip"
           aria-hidden="${!this._visible}"
         >

@@ -64,7 +64,7 @@ export class PrismAlert extends LitElement {
           </div>
           <div class="ml-3">
             ${this.title ? html`<h3 class="text-sm font-medium ${titleColor}">${this.title}</h3>` : ''}
-            <div class="mt-2 text-sm text-slate-700 dark:text-slate-300">
+            <div class="mt-2 text-sm text-slate-900 dark:text-white">
               <slot></slot>
             </div>
           </div>
