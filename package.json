@@ -1,5 +1,5 @@
 {
-  "name": "prismui",
+  "name": "@fabrizio.manna/prismui",
   "version": "1.1.0",
   "description": "**PrismUI** is a modern, framework-agnostic UI component library designed to bring the elegance of **Glassmorphism** to enterprise admin panels and data-rich dashboards.",
   "main": "dist/prismui.umd.js",
