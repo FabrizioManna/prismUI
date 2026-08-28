@@ -10,6 +10,7 @@
     "scaffold:stories": "node scripts/generate-stories.js",
     "storybook": "npm run analyze && storybook dev -p 6006",
     "build-storybook": "npm run analyze && storybook build",
+    "publish:npm": "npm run build && npm publish --access public",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
