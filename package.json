@@ -27,7 +27,9 @@
   },
   "homepage": "https://github.com/FabrizioManna/prismUI#readme",
   "dependencies": {
-    "lit": "^3.3.3"
+    "lit": "^3.3.3",
+    "lucide": "^1.35.0",
+    "lucide-static": "^1.35.0"
   },
   "devDependencies": {
     "@typescript/typescript6": "^6.0.2",

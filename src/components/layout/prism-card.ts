@@ -2,6 +2,9 @@ import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { sharedStyles } from '../../styles/shared-styles';
 
+/**
+ * A flexible, Glassmorphism container for content, stats, or forms.
+ */
 @customElement('prism-card')
 export class PrismCard extends LitElement {
   static styles = [
@@ -9,20 +12,36 @@ export class PrismCard extends LitElement {
     css`
       :host {
         display: block;
+        height: 100%;
       }
     `
   ];
 
+  /**
+   * Card title in the header.
+   */
   @property({ type: String }) title = '';
+
+  /**
+   * Card subtitle in the header.
+   */
   @property({ type: String }) subtitle = '';
 
+  /**
+   * Removes padding from the main content area (useful for edge-to-edge images or tables).
+   */
+  @property({ type: Boolean, attribute: 'no-padding' }) noPadding = false;
+
   render() {
+    const paddingClass = this.noPadding ? 'p-0' : 'p-6';
+
     return html`
-      <div class="bg-white/30 dark:bg-slate-900/40 backdrop-blur-md border border-white/20 dark:border-slate-700/50 rounded-2xl shadow-lg overflow-hidden flex flex-col h-full">
+      <div class="bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.04)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.16)] overflow-hidden flex flex-col h-full transition-shadow hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_8px_32px_rgba(0,0,0,0.24)]">
+        
         ${this.title || this.subtitle || this.querySelector('[slot="header"]') ? html`
-          <div class="px-6 py-5 border-b border-white/20 dark:border-slate-700/30">
-            <div class="flex justify-between items-center">
-              <div>
+          <div class="px-6 py-5 border-b border-slate-200/50 dark:border-slate-700/50 bg-white/20 dark:bg-slate-800/20">
+            <div class="flex justify-between items-center gap-4">
+              <div class="flex-1">
                 ${this.title ? html`<h3 class="text-lg font-semibold text-slate-800 dark:text-slate-100">${this.title}</h3>` : ''}
                 ${this.subtitle ? html`<p class="text-sm text-slate-500 dark:text-slate-400 mt-1">${this.subtitle}</p>` : ''}
               </div>
@@ -31,12 +50,12 @@ export class PrismCard extends LitElement {
           </div>
         ` : ''}
         
-        <div class="p-6 flex-1 flex flex-col">
+        <div class="${paddingClass} flex-1 flex flex-col relative z-10">
           <slot></slot>
         </div>
 
         ${this.querySelector('[slot="footer"]') ? html`
-          <div class="px-6 py-4 bg-white/10 dark:bg-slate-800/30 border-t border-white/20 dark:border-slate-700/30">
+          <div class="px-6 py-4 bg-slate-50/40 dark:bg-slate-800/40 border-t border-slate-200/50 dark:border-slate-700/50 mt-auto">
             <slot name="footer"></slot>
           </div>
         ` : ''}

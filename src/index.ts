@@ -29,6 +29,8 @@ export { PrismAccordion } from './components/navigation/prism-accordion';
 export { PrismCard } from './components/layout/prism-card';
 export { PrismStat } from './components/layout/prism-stat';
 export { PrismTable } from './components/layout/prism-table';
+export { PrismProgress } from './components/layout/prism-progress';
+export { PrismTooltip } from './components/layout/prism-tooltip';
 
 // Styles Exporter (Optional, if consumers want to use the shared styles directly)
 export { sharedStyles } from './styles/shared-styles';

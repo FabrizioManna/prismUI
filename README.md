@@ -41,6 +41,14 @@ Built on top of standard **Web Components** using [Lit](https://lit.dev/), style
 - `prism-tabs`: Horizontal navigation with animated active indicators.
 - `prism-breadcrumb`: Hierarchical page location display.
 - `prism-pagination`: Controls for data tables.
+- `prism-accordion`: Collapsible content sections with grid animations.
+
+### Data Display & Tables
+- `prism-table`: Advanced data tables with sorting, pagination, and selection.
+- `prism-card`: Flexible Glassmorphism containers.
+- `prism-stat`: Dashboard metric cards with trend indicators.
+- `prism-progress`: Linear progress bars with glowing gradients.
+- `prism-tooltip`: Hover tooltip for extra contextual info.
 
 ## 🛠️ Tech Stack
 
