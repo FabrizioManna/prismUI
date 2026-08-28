@@ -753,21 +753,40 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/styles/shared-styles.ts",
+      "path": "src/Introduction.stories.ts",
       "declarations": [
         {
           "kind": "variable",
-          "name": "sharedStyles",
-          "default": "css`${unsafeCSS(tailwindStyles)}`"
+          "name": "meta",
+          "type": {
+            "text": "Meta"
+          },
+          "default": "{ title: 'Introduction', }"
+        },
+        {
+          "kind": "variable",
+          "name": "Welcome",
+          "type": {
+            "text": "StoryObj"
+          },
+          "default": "{ render: () => html` <div style=\"font-family: sans-serif; color: white; padding: 2rem; max-width: 800px; margin: 0 auto; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; backdrop-filter: blur(10px);\"> <h1 style=\"font-size: 3rem; margin: 0 0 1rem 0;\">💎 PrismUI</h1> <p style=\"font-size: 1.25rem; opacity: 0.8; margin-bottom: 2rem;\"> The Ultimate Glassmorphism Web Component Library </p> <h2 style=\"font-size: 1.5rem; margin-top: 2rem; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 0.5rem;\">📦 Installation</h2> <pre style=\"background: rgba(0,0,0,0.5); padding: 1rem; border-radius: 8px;\"><code>npm install prismui</code></pre> <p style=\"margin-top: 1rem;\">PrismUI utilizes Lucide for its iconography. If rendering icons manually:</p> <pre style=\"background: rgba(0,0,0,0.5); padding: 1rem; border-radius: 8px;\"><code>npm install lucide-static</code></pre> <h2 style=\"font-size: 1.5rem; margin-top: 2rem; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 0.5rem;\">🚀 Usage Guide</h2> <p>Because PrismUI is built natively on standard Web Components, it works directly in the browser and integrates seamlessly with any modern JavaScript framework.</p> <h3 style=\"margin-top: 1.5rem; color: #61dafb;\">⚛️ React</h3> <pre style=\"background: rgba(0,0,0,0.5); padding: 1rem; border-radius: 8px;\"><code>import 'prismui/src/components/foundations/prism-button.js'; export default function App() { return ( &lt;div className=\"p-10\"&gt; &lt;prism-button variant=\"primary\"&gt;Submit Data&lt;/prism-button&gt; &lt;/div&gt; ); }</code></pre> <h3 style=\"margin-top: 1.5rem; color: #42b883;\">💚 Vue 3</h3> <p>Tell the Vue compiler to ignore components starting with <code>prism-</code> in your <code>vite.config.ts</code>:</p> <pre style=\"background: rgba(0,0,0,0.5); padding: 1rem; border-radius: 8px;\"><code>export default { plugins: [ vue({ template: { compilerOptions: { isCustomElement: (tag) => tag.startsWith('prism-') } } }) ] }</code></pre> <h3 style=\"margin-top: 1.5rem; color: #dd0031;\">🅰️ Angular</h3> <p>Simply add <code>CUSTOM_ELEMENTS_SCHEMA</code> to your module.</p> <pre style=\"background: rgba(0,0,0,0.5); padding: 1rem; border-radius: 8px;\"><code>import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'; @NgModule({ schemas: [CUSTOM_ELEMENTS_SCHEMA], }) export class AppModule { }</code></pre> </div> `, }"
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "sharedStyles",
+          "name": "default",
           "declaration": {
-            "name": "sharedStyles",
-            "module": "src/styles/shared-styles.ts"
+            "name": "meta",
+            "module": "src/Introduction.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Welcome",
+          "declaration": {
+            "name": "Welcome",
+            "module": "src/Introduction.stories.ts"
           }
         }
       ]
@@ -874,786 +893,84 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/layout/prism-card.stories.ts",
+      "path": "src/styles/shared-styles.ts",
       "declarations": [
         {
           "kind": "variable",
-          "name": "meta",
-          "type": {
-            "text": "Meta"
-          },
-          "default": "{ title: 'Data Display & Tables/Card', component: 'prism-card', argTypes: {}, }"
-        },
-        {
-          "kind": "variable",
-          "name": "Default",
-          "type": {
-            "text": "Story"
-          },
-          "default": "{ args: {}, render: () => html` <prism-card></prism-card> `, }"
+          "name": "sharedStyles",
+          "default": "css`${unsafeCSS(tailwindStyles)}`"
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "default",
+          "name": "sharedStyles",
           "declaration": {
-            "name": "meta",
-            "module": "src/components/layout/prism-card.stories.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Default",
-          "declaration": {
-            "name": "Default",
-            "module": "src/components/layout/prism-card.stories.ts"
+            "name": "sharedStyles",
+            "module": "src/styles/shared-styles.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/layout/prism-card.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "A flexible, Glassmorphism container for content, stats, or forms.",
-          "name": "PrismCard",
-          "members": [
-            {
-              "kind": "field",
-              "name": "title",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "Card title in the header.",
-              "attribute": "title"
-            },
-            {
-              "kind": "field",
-              "name": "subtitle",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "Card subtitle in the header.",
-              "attribute": "subtitle"
-            },
-            {
-              "kind": "field",
-              "name": "noPadding",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Removes padding from the main content area (useful for edge-to-edge images or tables).",
-              "attribute": "no-padding"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "title",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "Card title in the header.",
-              "fieldName": "title"
-            },
-            {
-              "name": "subtitle",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "Card subtitle in the header.",
-              "fieldName": "subtitle"
-            },
-            {
-              "name": "no-padding",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Removes padding from the main content area (useful for edge-to-edge images or tables).",
-              "fieldName": "noPadding"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "prism-card",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "PrismCard",
-          "declaration": {
-            "name": "PrismCard",
-            "module": "src/components/layout/prism-card.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "prism-card",
-          "declaration": {
-            "name": "PrismCard",
-            "module": "src/components/layout/prism-card.ts"
-          }
-        }
-      ]
+      "path": "storybook-static/sb-addons/essentials-actions-3/manager-bundle.js",
+      "declarations": [],
+      "exports": []
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/layout/prism-progress.stories.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "meta",
-          "type": {
-            "text": "Meta"
-          },
-          "default": "{ title: 'Data Display & Tables/Progress', component: 'prism-progress', argTypes: {}, }"
-        },
-        {
-          "kind": "variable",
-          "name": "Default",
-          "type": {
-            "text": "Story"
-          },
-          "default": "{ args: {}, render: () => html` <prism-progress></prism-progress> `, }"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "name": "meta",
-            "module": "src/components/layout/prism-progress.stories.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Default",
-          "declaration": {
-            "name": "Default",
-            "module": "src/components/layout/prism-progress.stories.ts"
-          }
-        }
-      ]
+      "path": "storybook-static/sb-addons/essentials-backgrounds-4/manager-bundle.js",
+      "declarations": [],
+      "exports": []
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/layout/prism-progress.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "A linear progress bar featuring a glowing gradient fill.",
-          "name": "PrismProgress",
-          "members": [
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "number"
-              },
-              "default": "0",
-              "description": "The current value of the progress bar.",
-              "attribute": "value"
-            },
-            {
-              "kind": "field",
-              "name": "max",
-              "type": {
-                "text": "number"
-              },
-              "default": "100",
-              "description": "The maximum value of the progress bar.",
-              "attribute": "max"
-            },
-            {
-              "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "Optional label to display above the progress bar.",
-              "attribute": "label"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "value",
-              "type": {
-                "text": "number"
-              },
-              "default": "0",
-              "description": "The current value of the progress bar.",
-              "fieldName": "value"
-            },
-            {
-              "name": "max",
-              "type": {
-                "text": "number"
-              },
-              "default": "100",
-              "description": "The maximum value of the progress bar.",
-              "fieldName": "max"
-            },
-            {
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "Optional label to display above the progress bar.",
-              "fieldName": "label"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "prism-progress",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "PrismProgress",
-          "declaration": {
-            "name": "PrismProgress",
-            "module": "src/components/layout/prism-progress.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "prism-progress",
-          "declaration": {
-            "name": "PrismProgress",
-            "module": "src/components/layout/prism-progress.ts"
-          }
-        }
-      ]
+      "path": "storybook-static/sb-addons/essentials-controls-2/manager-bundle.js",
+      "declarations": [],
+      "exports": []
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/layout/prism-stat.stories.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "meta",
-          "type": {
-            "text": "Meta"
-          },
-          "default": "{ title: 'Data Display & Tables/Stat', component: 'prism-stat', argTypes: {}, }"
-        },
-        {
-          "kind": "variable",
-          "name": "Default",
-          "type": {
-            "text": "Story"
-          },
-          "default": "{ args: {}, render: () => html` <prism-stat></prism-stat> `, }"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "name": "meta",
-            "module": "src/components/layout/prism-stat.stories.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Default",
-          "declaration": {
-            "name": "Default",
-            "module": "src/components/layout/prism-stat.stories.ts"
-          }
-        }
-      ]
+      "path": "storybook-static/sb-addons/essentials-measure-7/manager-bundle.js",
+      "declarations": [],
+      "exports": []
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/layout/prism-stat.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "A metric card for dashboards, supporting a trend indicator (arrow up/down).",
-          "name": "PrismStat",
-          "members": [
-            {
-              "kind": "field",
-              "name": "title",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The title or label of the metric.",
-              "attribute": "title"
-            },
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The main value to display.",
-              "attribute": "value"
-            },
-            {
-              "kind": "field",
-              "name": "trend",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "Optional trend string (e.g. \"+5.4%\" or \"-2.1%\").",
-              "attribute": "trend"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "title",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The title or label of the metric.",
-              "fieldName": "title"
-            },
-            {
-              "name": "value",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The main value to display.",
-              "fieldName": "value"
-            },
-            {
-              "name": "trend",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "Optional trend string (e.g. \"+5.4%\" or \"-2.1%\").",
-              "fieldName": "trend"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "prism-stat",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "PrismStat",
-          "declaration": {
-            "name": "PrismStat",
-            "module": "src/components/layout/prism-stat.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "prism-stat",
-          "declaration": {
-            "name": "PrismStat",
-            "module": "src/components/layout/prism-stat.ts"
-          }
-        }
-      ]
+      "path": "storybook-static/sb-addons/essentials-outline-8/manager-bundle.js",
+      "declarations": [],
+      "exports": []
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/layout/prism-table.stories.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "meta",
-          "type": {
-            "text": "Meta"
-          },
-          "default": "{ title: 'Data Display & Tables/Table', component: 'prism-table', argTypes: {}, }"
-        },
-        {
-          "kind": "variable",
-          "name": "Default",
-          "type": {
-            "text": "Story"
-          },
-          "default": "{ args: {}, render: () => html` <prism-table></prism-table> `, }"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "name": "meta",
-            "module": "src/components/layout/prism-table.stories.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Default",
-          "declaration": {
-            "name": "Default",
-            "module": "src/components/layout/prism-table.stories.ts"
-          }
-        }
-      ]
+      "path": "storybook-static/sb-addons/essentials-toolbars-6/manager-bundle.js",
+      "declarations": [],
+      "exports": []
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/layout/prism-table.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Advanced Data Table styled with Glassmorphism.\nSupports row selection, sorting, and pagination footer slots.",
-          "name": "PrismTable",
-          "members": [
-            {
-              "kind": "field",
-              "name": "columns",
-              "type": {
-                "text": "TableColumn[]"
-              },
-              "default": "[]",
-              "attribute": "columns"
-            },
-            {
-              "kind": "field",
-              "name": "data",
-              "type": {
-                "text": "any[]"
-              },
-              "default": "[]",
-              "attribute": "data"
-            },
-            {
-              "kind": "field",
-              "name": "selectable",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "If true, enables a leading checkbox column for row selection.",
-              "attribute": "selectable"
-            },
-            {
-              "kind": "field",
-              "name": "rowKey",
-              "type": {
-                "text": "string"
-              },
-              "default": "'id'",
-              "description": "Identifies the unique key in `data` to track selections (default: 'id')",
-              "attribute": "rowKey"
-            },
-            {
-              "kind": "field",
-              "name": "_selectedKeys",
-              "privacy": "private",
-              "default": "new Set<string>()"
-            },
-            {
-              "kind": "field",
-              "name": "_sortColumn",
-              "type": {
-                "text": "string"
-              },
-              "privacy": "private",
-              "default": "''"
-            },
-            {
-              "kind": "field",
-              "name": "_sortDirection",
-              "type": {
-                "text": "'asc' | 'desc' | null"
-              },
-              "privacy": "private",
-              "default": "null"
-            },
-            {
-              "kind": "method",
-              "name": "_toggleSelectAll",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "CustomEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "_toggleRowSelection",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "key",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "CustomEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "_dispatchSelection",
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "_handleSort",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "colKey",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ]
-            }
-          ],
-          "events": [
-            {
-              "name": "selection-change",
-              "type": {
-                "text": "CustomEvent"
-              }
-            },
-            {
-              "name": "sort",
-              "type": {
-                "text": "CustomEvent"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "columns",
-              "type": {
-                "text": "TableColumn[]"
-              },
-              "default": "[]",
-              "fieldName": "columns"
-            },
-            {
-              "name": "data",
-              "type": {
-                "text": "any[]"
-              },
-              "default": "[]",
-              "fieldName": "data"
-            },
-            {
-              "name": "selectable",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "If true, enables a leading checkbox column for row selection.",
-              "fieldName": "selectable"
-            },
-            {
-              "name": "rowKey",
-              "type": {
-                "text": "string"
-              },
-              "default": "'id'",
-              "description": "Identifies the unique key in `data` to track selections (default: 'id')",
-              "fieldName": "rowKey"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "prism-table",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "PrismTable",
-          "declaration": {
-            "name": "PrismTable",
-            "module": "src/components/layout/prism-table.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "prism-table",
-          "declaration": {
-            "name": "PrismTable",
-            "module": "src/components/layout/prism-table.ts"
-          }
-        }
-      ]
+      "path": "storybook-static/sb-addons/essentials-viewport-5/manager-bundle.js",
+      "declarations": [],
+      "exports": []
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/layout/prism-tooltip.stories.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "meta",
-          "type": {
-            "text": "Meta"
-          },
-          "default": "{ title: 'Data Display & Tables/Tooltip', component: 'prism-tooltip', argTypes: {}, }"
-        },
-        {
-          "kind": "variable",
-          "name": "Default",
-          "type": {
-            "text": "Story"
-          },
-          "default": "{ args: {}, render: () => html` <prism-tooltip></prism-tooltip> `, }"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "name": "meta",
-            "module": "src/components/layout/prism-tooltip.stories.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Default",
-          "declaration": {
-            "name": "Default",
-            "module": "src/components/layout/prism-tooltip.stories.ts"
-          }
-        }
-      ]
+      "path": "storybook-static/sb-addons/links-1/manager-bundle.js",
+      "declarations": [],
+      "exports": []
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/layout/prism-tooltip.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "A hover tooltip component for extra contextual information.",
-          "name": "PrismTooltip",
-          "members": [
-            {
-              "kind": "field",
-              "name": "text",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The text to display inside the tooltip.",
-              "attribute": "text"
-            },
-            {
-              "kind": "field",
-              "name": "placement",
-              "type": {
-                "text": "'top' | 'bottom' | 'left' | 'right'"
-              },
-              "default": "'top'",
-              "description": "The placement of the tooltip relative to the element.",
-              "attribute": "placement"
-            },
-            {
-              "kind": "field",
-              "name": "_visible",
-              "type": {
-                "text": "boolean"
-              },
-              "privacy": "private",
-              "default": "false"
-            },
-            {
-              "kind": "method",
-              "name": "_show",
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "_hide",
-              "privacy": "private"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "text",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The text to display inside the tooltip.",
-              "fieldName": "text"
-            },
-            {
-              "name": "placement",
-              "type": {
-                "text": "'top' | 'bottom' | 'left' | 'right'"
-              },
-              "default": "'top'",
-              "description": "The placement of the tooltip relative to the element.",
-              "fieldName": "placement"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "prism-tooltip",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "PrismTooltip",
-          "declaration": {
-            "name": "PrismTooltip",
-            "module": "src/components/layout/prism-tooltip.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "prism-tooltip",
-          "declaration": {
-            "name": "PrismTooltip",
-            "module": "src/components/layout/prism-tooltip.ts"
-          }
-        }
-      ]
+      "path": "storybook-static/sb-addons/interactions-9/manager-bundle.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "storybook-static/sb-addons/storybook-core-core-server-presets-0/common-manager-bundle.js",
+      "declarations": [],
+      "exports": []
     },
     {
       "kind": "javascript-module",
@@ -3994,6 +3311,789 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/layout/prism-card.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "meta",
+          "type": {
+            "text": "Meta"
+          },
+          "default": "{ title: 'Data Display & Tables/Card', component: 'prism-card', argTypes: {}, }"
+        },
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "Story"
+          },
+          "default": "{ args: {}, render: () => html` <prism-card></prism-card> `, }"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "meta",
+            "module": "src/components/layout/prism-card.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/components/layout/prism-card.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/layout/prism-card.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A flexible, Glassmorphism container for content, stats, or forms.",
+          "name": "PrismCard",
+          "members": [
+            {
+              "kind": "field",
+              "name": "title",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Card title in the header.",
+              "attribute": "title"
+            },
+            {
+              "kind": "field",
+              "name": "subtitle",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Card subtitle in the header.",
+              "attribute": "subtitle"
+            },
+            {
+              "kind": "field",
+              "name": "noPadding",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Removes padding from the main content area (useful for edge-to-edge images or tables).",
+              "attribute": "no-padding"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "title",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Card title in the header.",
+              "fieldName": "title"
+            },
+            {
+              "name": "subtitle",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Card subtitle in the header.",
+              "fieldName": "subtitle"
+            },
+            {
+              "name": "no-padding",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Removes padding from the main content area (useful for edge-to-edge images or tables).",
+              "fieldName": "noPadding"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "prism-card",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "PrismCard",
+          "declaration": {
+            "name": "PrismCard",
+            "module": "src/components/layout/prism-card.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "prism-card",
+          "declaration": {
+            "name": "PrismCard",
+            "module": "src/components/layout/prism-card.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/layout/prism-progress.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "meta",
+          "type": {
+            "text": "Meta"
+          },
+          "default": "{ title: 'Data Display & Tables/Progress', component: 'prism-progress', argTypes: {}, }"
+        },
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "Story"
+          },
+          "default": "{ args: {}, render: () => html` <prism-progress></prism-progress> `, }"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "meta",
+            "module": "src/components/layout/prism-progress.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/components/layout/prism-progress.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/layout/prism-progress.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A linear progress bar featuring a glowing gradient fill.",
+          "name": "PrismProgress",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The current value of the progress bar.",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "100",
+              "description": "The maximum value of the progress bar.",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Optional label to display above the progress bar.",
+              "attribute": "label"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The current value of the progress bar.",
+              "fieldName": "value"
+            },
+            {
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "100",
+              "description": "The maximum value of the progress bar.",
+              "fieldName": "max"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Optional label to display above the progress bar.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "prism-progress",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "PrismProgress",
+          "declaration": {
+            "name": "PrismProgress",
+            "module": "src/components/layout/prism-progress.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "prism-progress",
+          "declaration": {
+            "name": "PrismProgress",
+            "module": "src/components/layout/prism-progress.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/layout/prism-stat.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "meta",
+          "type": {
+            "text": "Meta"
+          },
+          "default": "{ title: 'Data Display & Tables/Stat', component: 'prism-stat', argTypes: {}, }"
+        },
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "Story"
+          },
+          "default": "{ args: {}, render: () => html` <prism-stat></prism-stat> `, }"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "meta",
+            "module": "src/components/layout/prism-stat.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/components/layout/prism-stat.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/layout/prism-stat.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A metric card for dashboards, supporting a trend indicator (arrow up/down).",
+          "name": "PrismStat",
+          "members": [
+            {
+              "kind": "field",
+              "name": "title",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The title or label of the metric.",
+              "attribute": "title"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The main value to display.",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "trend",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Optional trend string (e.g. \"+5.4%\" or \"-2.1%\").",
+              "attribute": "trend"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "title",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The title or label of the metric.",
+              "fieldName": "title"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The main value to display.",
+              "fieldName": "value"
+            },
+            {
+              "name": "trend",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Optional trend string (e.g. \"+5.4%\" or \"-2.1%\").",
+              "fieldName": "trend"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "prism-stat",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "PrismStat",
+          "declaration": {
+            "name": "PrismStat",
+            "module": "src/components/layout/prism-stat.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "prism-stat",
+          "declaration": {
+            "name": "PrismStat",
+            "module": "src/components/layout/prism-stat.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/layout/prism-table.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "meta",
+          "type": {
+            "text": "Meta"
+          },
+          "default": "{ title: 'Data Display & Tables/Table', component: 'prism-table', argTypes: {}, }"
+        },
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "Story"
+          },
+          "default": "{ args: {}, render: () => html` <prism-table></prism-table> `, }"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "meta",
+            "module": "src/components/layout/prism-table.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/components/layout/prism-table.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/layout/prism-table.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Advanced Data Table styled with Glassmorphism.\nSupports row selection, sorting, and pagination footer slots.",
+          "name": "PrismTable",
+          "members": [
+            {
+              "kind": "field",
+              "name": "columns",
+              "type": {
+                "text": "TableColumn[]"
+              },
+              "default": "[]",
+              "attribute": "columns"
+            },
+            {
+              "kind": "field",
+              "name": "data",
+              "type": {
+                "text": "any[]"
+              },
+              "default": "[]",
+              "attribute": "data"
+            },
+            {
+              "kind": "field",
+              "name": "selectable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "If true, enables a leading checkbox column for row selection.",
+              "attribute": "selectable"
+            },
+            {
+              "kind": "field",
+              "name": "rowKey",
+              "type": {
+                "text": "string"
+              },
+              "default": "'id'",
+              "description": "Identifies the unique key in `data` to track selections (default: 'id')",
+              "attribute": "rowKey"
+            },
+            {
+              "kind": "field",
+              "name": "_selectedKeys",
+              "privacy": "private",
+              "default": "new Set<string>()"
+            },
+            {
+              "kind": "field",
+              "name": "_sortColumn",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "_sortDirection",
+              "type": {
+                "text": "'asc' | 'desc' | null"
+              },
+              "privacy": "private",
+              "default": "null"
+            },
+            {
+              "kind": "method",
+              "name": "_toggleSelectAll",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "CustomEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "_toggleRowSelection",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "key",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "CustomEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "_dispatchSelection",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "_handleSort",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "colKey",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "selection-change",
+              "type": {
+                "text": "CustomEvent"
+              }
+            },
+            {
+              "name": "sort",
+              "type": {
+                "text": "CustomEvent"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "columns",
+              "type": {
+                "text": "TableColumn[]"
+              },
+              "default": "[]",
+              "fieldName": "columns"
+            },
+            {
+              "name": "data",
+              "type": {
+                "text": "any[]"
+              },
+              "default": "[]",
+              "fieldName": "data"
+            },
+            {
+              "name": "selectable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "If true, enables a leading checkbox column for row selection.",
+              "fieldName": "selectable"
+            },
+            {
+              "name": "rowKey",
+              "type": {
+                "text": "string"
+              },
+              "default": "'id'",
+              "description": "Identifies the unique key in `data` to track selections (default: 'id')",
+              "fieldName": "rowKey"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "prism-table",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "PrismTable",
+          "declaration": {
+            "name": "PrismTable",
+            "module": "src/components/layout/prism-table.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "prism-table",
+          "declaration": {
+            "name": "PrismTable",
+            "module": "src/components/layout/prism-table.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/layout/prism-tooltip.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "meta",
+          "type": {
+            "text": "Meta"
+          },
+          "default": "{ title: 'Data Display & Tables/Tooltip', component: 'prism-tooltip', argTypes: {}, }"
+        },
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "Story"
+          },
+          "default": "{ args: {}, render: () => html` <prism-tooltip></prism-tooltip> `, }"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "meta",
+            "module": "src/components/layout/prism-tooltip.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/components/layout/prism-tooltip.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/layout/prism-tooltip.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A hover tooltip component for extra contextual information.",
+          "name": "PrismTooltip",
+          "members": [
+            {
+              "kind": "field",
+              "name": "text",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The text to display inside the tooltip.",
+              "attribute": "text"
+            },
+            {
+              "kind": "field",
+              "name": "placement",
+              "type": {
+                "text": "'top' | 'bottom' | 'left' | 'right'"
+              },
+              "default": "'top'",
+              "description": "The placement of the tooltip relative to the element.",
+              "attribute": "placement"
+            },
+            {
+              "kind": "field",
+              "name": "_visible",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "method",
+              "name": "_show",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "_hide",
+              "privacy": "private"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "text",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The text to display inside the tooltip.",
+              "fieldName": "text"
+            },
+            {
+              "name": "placement",
+              "type": {
+                "text": "'top' | 'bottom' | 'left' | 'right'"
+              },
+              "default": "'top'",
+              "description": "The placement of the tooltip relative to the element.",
+              "fieldName": "placement"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "prism-tooltip",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "PrismTooltip",
+          "declaration": {
+            "name": "PrismTooltip",
+            "module": "src/components/layout/prism-tooltip.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "prism-tooltip",
+          "declaration": {
+            "name": "PrismTooltip",
+            "module": "src/components/layout/prism-tooltip.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/navigation/prism-accordion.stories.ts",
       "declarations": [
         {
@@ -5667,66 +5767,6 @@
           }
         }
       ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "storybook-static/sb-addons/essentials-actions-3/manager-bundle.js",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "storybook-static/sb-addons/essentials-controls-2/manager-bundle.js",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "storybook-static/sb-addons/essentials-backgrounds-4/manager-bundle.js",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "storybook-static/sb-addons/essentials-measure-7/manager-bundle.js",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "storybook-static/sb-addons/essentials-outline-8/manager-bundle.js",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "storybook-static/sb-addons/essentials-toolbars-6/manager-bundle.js",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "storybook-static/sb-addons/essentials-viewport-5/manager-bundle.js",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "storybook-static/sb-addons/interactions-9/manager-bundle.js",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "storybook-static/sb-addons/links-1/manager-bundle.js",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "storybook-static/sb-addons/storybook-core-core-server-presets-0/common-manager-bundle.js",
-      "declarations": [],
-      "exports": []
     }
   ]
 }
