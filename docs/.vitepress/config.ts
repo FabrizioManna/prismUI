@@ -5,7 +5,7 @@ export default defineConfig({
   title: "PrismUI",
   description: "A framework-agnostic Glassmorphism UI Kit",
   themeConfig: {
-    logo: '/logo.jpg',
+    logo: '/logo-bkg.png',
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Components', link: '/components/index' }
