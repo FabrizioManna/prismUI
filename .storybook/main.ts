@@ -14,9 +14,9 @@ const config: StorybookConfig = {
   docs: {
     autodocs: "tag",
   },
-  async viteFinal(config) {
-    if (process.env.BASE_URL) {
-      config.base = process.env.BASE_URL;
+  async viteFinal(config, { configType }) {
+    if (configType === 'PRODUCTION') {
+      config.base = '/prismUI/';
     }
     return config;
   },
