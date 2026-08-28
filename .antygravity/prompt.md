@@ -25,3 +25,4 @@ If asked to create a new component, you MUST NEVER guess the structure. You must
 
 ## 5. Language
 All generated code, comments (JSDoc), variable names, and documentation must be written in **English**.
+- 📖 Reference: `.antygravity/rules/08-language-and-comments.md`
