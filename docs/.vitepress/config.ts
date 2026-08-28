@@ -1,9 +1,11 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
+  base: '/prismUI/',
   title: "PrismUI",
   description: "A framework-agnostic Glassmorphism UI Kit",
   themeConfig: {
+    logo: '/logo.png',
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Components', link: '/components/index' }

@@ -8,6 +8,12 @@ export { PrismButton } from './components/form/prism-button';
 export { PrismInput } from './components/form/prism-input';
 export { PrismSelect } from './components/form/prism-select';
 export { PrismToggle } from './components/form/prism-toggle';
+export { PrismTextarea } from './components/form/prism-textarea';
+export { PrismCheckbox } from './components/form/prism-checkbox';
+export { PrismRadio } from './components/form/prism-radio';
+export { PrismRadioGroup } from './components/form/prism-radio-group';
+export { PrismSlider } from './components/form/prism-slider';
+export { PrismFileUpload } from './components/form/prism-file-upload';
 
 // Navigation Components
 export { PrismSidebar } from './components/navigation/prism-sidebar';

@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="./docs/public/logo.png" alt="PrismUI Logo" width="300" />
+</div>
+
 # 🧊 PrismUI
 
 **PrismUI** is a modern, framework-agnostic UI component library designed to bring the elegance of **Glassmorphism** to enterprise admin panels and data-rich dashboards. 
@@ -12,6 +16,24 @@ Built on top of standard **Web Components** using [Lit](https://lit.dev/), style
 - **📊 Admin & Dashboard Ready:** A curated set of components tailored for complex layouts, including collapsible sidebars, data tables, stat cards, and interactive forms.
 - **⚡ Developer Experience:** Fully typed with TypeScript, blazing fast builds powered by Vite, and automated docs generation.
 
+## 📦 Component Catalog (In Progress)
+
+### Foundations & Actions
+- `prism-button`: Multi-variant, loading states, and icon slots.
+- `prism-badge`: Status indicators (success, warning, error, info).
+- `prism-avatar`: User profile picture with fallback initials.
+- `prism-icon`: Lightweight SVG wrapper inheriting `currentColor`.
+
+### Form & Data Entry
+- `prism-input`: High-density text inputs with error states and password toggles.
+- `prism-textarea`: Auto-resizing multi-line inputs.
+- `prism-select`: Custom dropdowns styled seamlessly with Glassmorphism.
+- `prism-checkbox`: Indeterminate state support for data tables.
+- `prism-radio` / `prism-radio-group`: Accessible radio buttons.
+- `prism-toggle`: Smooth animated boolean switches.
+- `prism-slider`: Custom styled range sliders.
+- `prism-file-upload`: Drag-and-drop zones for file selection.
+
 ## 🛠️ Tech Stack
 
 - **Core:** Lit & standard Web Components
@@ -19,3 +41,4 @@ Built on top of standard **Web Components** using [Lit](https://lit.dev/), style
 - **Tooling:** Vite & TypeScript
 - **Docs:** VitePress / Storybook
 - **CI/CD:** GitHub Actions & GitHub Pages
+- **Environment:** Node 26+ Required

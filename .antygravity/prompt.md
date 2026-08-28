@@ -31,3 +31,7 @@ All generated code, comments (JSDoc), variable names, and documentation must be 
 You must follow a Spec-Driven Development workflow. Do not write code immediately from a prompt. First, prepare a specification, break it down into smaller tasks, get approval, and log completed work as individual spec files in the `.antygravity/specs/` directory.
 - 📖 Reference: `.antygravity/rules/09-spec-driven-development.md`
 - 📁 Specs Directory: `.antygravity/specs/`
+
+## 7. Documentation & README
+The main `README.md` must be kept strictly up to date without waiting for user prompts whenever new components are built or architectural changes occur.
+- 📖 Reference: `.antygravity/rules/10-readme-updates.md`
