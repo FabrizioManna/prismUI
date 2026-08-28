@@ -22,7 +22,7 @@ export class PrismNavbar extends LitElement {
 
   render() {
     return html`
-      <header class="w-full h-16 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-700/50 flex items-center justify-between px-4 sm:px-6 shadow-sm">
+      <header class="prism-glass w-full h-16 !rounded-none flex items-center justify-between px-4 sm:px-6">
         
         <!-- Left: Brand / Mobile Toggle -->
         <div class="flex items-center gap-4">

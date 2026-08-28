@@ -104,7 +104,7 @@ export class PrismToast extends LitElement {
     }
 
     return html`
-      <div class="pointer-events-auto flex w-full max-w-md bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-lg rounded-xl overflow-hidden border ${borderColor} animate-toast-in ring-1 ring-black/5 dark:ring-white/10">
+      <div class="prism-glass pointer-events-auto flex w-full max-w-md overflow-hidden animate-toast-in ring-1 ring-black/5 dark:ring-white/10 ${borderColor}">
         <div class="p-4 flex items-start w-full">
           <div class="flex-shrink-0 ${iconColor} mt-0.5">
             <prism-icon .icon="${iconSvg}" size="20"></prism-icon>

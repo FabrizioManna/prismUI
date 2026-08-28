@@ -52,7 +52,7 @@ export class PrismModal extends LitElement {
         role="dialog"
       >
         <!-- Modal Container -->
-        <div class="relative w-full max-w-lg bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-white/40 dark:border-slate-700/50 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)] flex flex-col transform transition-all duration-300 scale-100 opacity-100 animate-in fade-in zoom-in-95">
+        <div class="prism-glass relative w-full max-w-lg flex flex-col transform transition-all duration-300 scale-100 opacity-100 animate-in fade-in zoom-in-95">
           
           <!-- Header -->
           <div class="flex items-center justify-between px-6 py-4 border-b border-slate-200/50 dark:border-slate-700/50">

@@ -69,7 +69,7 @@ export class PrismMenu extends LitElement {
         <!-- Dropdown Menu -->
         ${this._isOpen ? html`
           <ul 
-            class="absolute z-50 mt-2 min-w-[200px] py-1 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 rounded-lg shadow-[0_8px_30px_rgb(0,0,0,0.12)] ${placementClass}"
+            class="prism-glass absolute z-50 mt-2 min-w-[200px] py-1 ${placementClass}"
             role="menu"
           >
             <slot></slot>

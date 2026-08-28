@@ -36,7 +36,7 @@ export class PrismCard extends LitElement {
     const paddingClass = this.noPadding ? 'p-0' : 'p-6';
 
     return html`
-      <div class="bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.04)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.16)] overflow-hidden flex flex-col h-full transition-shadow hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_8px_32px_rgba(0,0,0,0.24)]">
+      <div class="prism-glass flex flex-col h-full transition-shadow hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_8px_32px_rgba(0,0,0,0.24)]">
         
         ${this.title || this.subtitle || this.querySelector('[slot="header"]') ? html`
           <div class="px-6 py-5 border-b border-slate-200/50 dark:border-slate-700/50 bg-white/20 dark:bg-slate-800/20">

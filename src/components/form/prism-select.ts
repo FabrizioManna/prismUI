@@ -95,7 +95,7 @@ export class PrismSelect extends LitElement {
 
         <!-- Dropdown Menu -->
         ${this._isOpen ? html`
-          <ul class="absolute z-50 w-full mt-2 py-1 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 rounded-lg shadow-[0_8px_30px_rgb(0,0,0,0.12)] max-h-60 overflow-auto">
+          <ul class="prism-glass absolute z-50 w-full mt-2 py-1 max-h-60 overflow-auto">
             ${this.options.map(option => html`
               <li
                 @click="${() => this._selectOption(option.value)}"

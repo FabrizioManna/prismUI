@@ -49,7 +49,7 @@ export class PrismStat extends LitElement {
     }
 
     return html`
-      <div class="bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 rounded-2xl p-6 shadow-[0_8px_30px_rgba(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.16)] flex items-start justify-between group transition-transform hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)]">
+      <div class="prism-glass p-6 flex items-start justify-between group transition-transform hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)]">
         
         <div>
           <p class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">${this.title}</p>

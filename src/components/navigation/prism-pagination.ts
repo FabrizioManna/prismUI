@@ -59,7 +59,7 @@ export class PrismPagination extends LitElement {
     }
 
     return html`
-      <div class="flex items-center justify-between px-4 py-3 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md border border-slate-200/50 dark:border-slate-700/50 sm:px-6 rounded-lg">
+      <div class="prism-glass flex items-center justify-between px-4 py-3 sm:px-6">
         <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
           <div>
             <p class="text-sm text-slate-700 dark:text-slate-300">

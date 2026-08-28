@@ -106,7 +106,7 @@ export class PrismTable extends LitElement {
     const someSelected = this._selectedKeys.size > 0 && this._selectedKeys.size < this.data.length;
 
     return html`
-      <div class="w-full flex flex-col rounded-xl border border-slate-200/40 dark:border-slate-700/50 bg-white/20 dark:bg-slate-900/30 backdrop-blur-md overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.02)] dark:shadow-[0_4px_24px_rgba(0,0,0,0.1)]">
+      <div class="prism-glass w-full flex flex-col overflow-hidden">
         <div class="overflow-x-auto">
           <table class="w-full text-left border-collapse">
             <thead>

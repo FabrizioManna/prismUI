@@ -64,7 +64,7 @@ export class PrismDrawer extends LitElement {
         role="dialog"
       >
         <!-- Drawer Container -->
-        <div class="fixed top-0 bottom-0 w-full max-w-md bg-white/70 dark:bg-slate-900/70 backdrop-blur-2xl border-white/40 dark:border-slate-700/50 shadow-2xl flex flex-col ${positionClasses} ${slideInClass}">
+        <div class="prism-glass fixed top-0 bottom-0 w-full max-w-md flex flex-col !rounded-none ${positionClasses} ${slideInClass}">
           
           <!-- Header -->
           <div class="flex items-center justify-between px-6 py-5 border-b border-slate-200/50 dark:border-slate-700/50 bg-white/30 dark:bg-slate-800/30">

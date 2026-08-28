@@ -57,7 +57,7 @@ export class PrismAlert extends LitElement {
     }
 
     return html`
-      <div class="rounded-xl border ${borderClass} ${bgClass} p-4 backdrop-blur-md">
+      <div class="prism-glass p-4 ${bgClass} ${borderClass}">
         <div class="flex">
           <div class="flex-shrink-0 ${iconColor}">
             <prism-icon .icon="${iconSvg}" size="20"></prism-icon>
