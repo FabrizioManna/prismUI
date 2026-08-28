@@ -10,6 +10,7 @@ You must silently read and acknowledge the master summary file to understand the
 ## 2. Strict Design System Enforcement
 PrismUI is built exclusively on the Glassmorphism UI trend. You are forbidden from using solid backgrounds for components.
 - 📖 Reference: `.antygravity/rules/03-glass-design-system.md`
+- 📖 Reference: `.antygravity/rules/15-glassmorphism-accessibility.md`
 
 ## 3. Engineering Standards
 Code must be production-ready, fully accessible, and written in strict TypeScript using standard Web Components (Lit).
@@ -48,3 +49,8 @@ Never use `npm audit fix --force`. Dev dependency vulnerabilities should be mana
 ## 10. Git & Commit Conventions
 All commits must be in English and follow the Conventional Commits specification.
 - 📖 Reference: `.antygravity/rules/14-commit-conventions.md`
+
+## 11. Custom Skills & Workflows
+The project has specialized workflows that you should utilize when requested:
+- 🛠️ **Spec Delivery Pipeline**: Executed when the user asks for a feature implementation from start to finish. Reads instructions from: `.antygravity/skills/spec-delivery-pipeline/SKILL.md`
+- 🛠️ **Create Spec**: Executed when the user asks to refine and translate an Italian feature request into an English spec. Reads instructions from: `.antygravity/skills/create-spec/SKILL.md`
