@@ -44,3 +44,7 @@ Whenever a dependency is removed, all references to it (code, scripts, CI/CD, co
 ## 9. NPM & Security
 Never use `npm audit fix --force`. Dev dependency vulnerabilities should be managed surgically using `overrides`, not brute-force commands.
 - 📖 Reference: `.antygravity/rules/13-npm-audit-policy.md`
+
+## 10. Git & Commit Conventions
+All commits must be in English and follow the Conventional Commits specification.
+- 📖 Reference: `.antygravity/rules/14-commit-conventions.md`
