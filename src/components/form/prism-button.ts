@@ -63,16 +63,19 @@ export class PrismButton extends LitElement {
     let variantClasses = "";
     switch (this.variant) {
       case 'primary':
-        variantClasses = "bg-blue-500/40 hover:bg-blue-600/50 border-blue-400/40 text-blue-900 dark:text-blue-50 focus:ring-blue-500/50 shadow-[0_0_15px_rgba(59,130,246,0.2)]";
+        // High contrast rule: text-white on dark background
+        variantClasses = "bg-blue-600/50 hover:bg-blue-600/60 border border-blue-500/40 text-white focus:ring-blue-500/50 shadow-[0_0_15px_rgba(59,130,246,0.3)]";
         break;
       case 'secondary':
-        variantClasses = "bg-white/30 hover:bg-white/40 dark:bg-slate-800/40 dark:hover:bg-slate-700/50 border-slate-300/40 dark:border-slate-600/40 text-slate-800 dark:text-slate-200 focus:ring-slate-400/50 shadow-sm";
+        // Light bg: dark text in light mode, light text in dark mode
+        variantClasses = "bg-white/30 hover:bg-white/40 dark:bg-slate-800/50 dark:hover:bg-slate-700/60 border border-slate-300/40 dark:border-slate-600/40 text-slate-900 dark:text-white focus:ring-slate-400/50 shadow-sm";
         break;
       case 'danger':
-        variantClasses = "bg-red-500/40 hover:bg-red-600/50 border-red-400/40 text-red-900 dark:text-red-50 focus:ring-red-500/50 shadow-[0_0_15px_rgba(239,68,68,0.2)]";
+        // High contrast rule: text-white on dark red background
+        variantClasses = "bg-red-600/50 hover:bg-red-600/60 border border-red-500/40 text-white focus:ring-red-500/50 shadow-[0_0_15px_rgba(239,68,68,0.3)]";
         break;
       case 'ghost':
-        variantClasses = "bg-transparent hover:bg-slate-200/30 dark:hover:bg-slate-700/30 border-transparent text-slate-700 dark:text-slate-300 focus:ring-slate-400/50";
+        variantClasses = "bg-transparent hover:bg-slate-200/30 dark:hover:bg-slate-700/30 border border-transparent text-slate-800 dark:text-white focus:ring-slate-400/50";
         break;
     }
 
