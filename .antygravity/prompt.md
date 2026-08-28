@@ -15,12 +15,19 @@ PrismUI is built exclusively on the Glassmorphism UI trend. You are forbidden fr
 
 ## 3. Engineering Standards
 Code must be production-ready, fully accessible, and written in strict TypeScript using standard Web Components (Lit).
-Before writing Lit components, refresh your context on:
-- 📖 Reference: `.antygravity/rules/02-lit-best-practices.md`
-- 📖 Reference: `.antygravity/rules/04-accessibility-a11y.md`
-- 📖 Reference: `.antygravity/rules/06-state-and-events.md`
-- 📖 Reference: `.antygravity/rules/17-tailwind-best-practices.md`
+Before writing Lit components, refresh your context on these specific domains:
+
+**Clean Code & Architecture**
 - 📖 Reference: `.antygravity/rules/18-clean-code-practices.md`
+- 📖 Reference: `.antygravity/rules/19-typescript-linter-rules.md`
+
+**Web Components (Lit)**
+- 📖 Reference: `.antygravity/rules/02-lit-best-practices.md`
+- 📖 Reference: `.antygravity/rules/06-state-and-events.md`
+
+**Styling & Accessibility**
+- 📖 Reference: `.antygravity/rules/17-tailwind-best-practices.md`
+- 📖 Reference: `.antygravity/rules/04-accessibility-a11y.md`
 
 ## 4. Component Generation
 If asked to create a new component, you MUST NEVER guess the structure. You must use the official boilerplate template:
