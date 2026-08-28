@@ -768,6 +768,78 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/form/prism-button.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "meta",
+          "type": {
+            "text": "Meta"
+          },
+          "default": "{ title: 'Foundations & Actions/Button', component: 'prism-button', // The tag name exactly as it appears in custom-elements.json argTypes: { variant: { control: 'select', options: ['primary', 'secondary', 'danger', 'ghost'], }, size: { control: 'select', options: ['sm', 'md', 'lg'], }, }, }"
+        },
+        {
+          "kind": "variable",
+          "name": "Primary",
+          "type": {
+            "text": "Story"
+          },
+          "default": "{ args: { variant: 'primary', size: 'md', disabled: false, loading: false, }, render: (args) => html` <prism-button variant=\"${args.variant}\" size=\"${args.size}\" ?disabled=\"${args.disabled}\" ?loading=\"${args.loading}\"> Click Me </prism-button> `, }"
+        },
+        {
+          "kind": "variable",
+          "name": "Secondary",
+          "type": {
+            "text": "Story"
+          },
+          "default": "{ args: { ...Primary.args, variant: 'secondary', }, render: Primary.render, }"
+        },
+        {
+          "kind": "variable",
+          "name": "Danger",
+          "type": {
+            "text": "Story"
+          },
+          "default": "{ args: { ...Primary.args, variant: 'danger', }, render: Primary.render, }"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "meta",
+            "module": "src/components/form/prism-button.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Primary",
+          "declaration": {
+            "name": "Primary",
+            "module": "src/components/form/prism-button.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Secondary",
+          "declaration": {
+            "name": "Secondary",
+            "module": "src/components/form/prism-button.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Danger",
+          "declaration": {
+            "name": "Danger",
+            "module": "src/components/form/prism-button.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/form/prism-button.ts",
       "declarations": [
         {
@@ -2283,6 +2355,270 @@
           "declaration": {
             "name": "PrismToggle",
             "module": "src/components/form/prism-toggle.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/foundations/prism-avatar.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "User profile picture component.\nDisplays an image if `src` is provided, otherwise falls back to `initials`.\nHandles image loading errors by gracefully falling back to initials.",
+          "name": "PrismAvatar",
+          "members": [
+            {
+              "kind": "field",
+              "name": "src",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The URL of the avatar image.",
+              "attribute": "src"
+            },
+            {
+              "kind": "field",
+              "name": "alt",
+              "type": {
+                "text": "string"
+              },
+              "default": "'User avatar'",
+              "description": "Alt text for the avatar image (important for accessibility).",
+              "attribute": "alt"
+            },
+            {
+              "kind": "field",
+              "name": "initials",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The initials to display if the image is missing or fails to load.",
+              "attribute": "initials"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "number"
+              },
+              "default": "40",
+              "description": "The size of the avatar in pixels.",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "_hasError",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "method",
+              "name": "_handleError",
+              "privacy": "private"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "src",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The URL of the avatar image.",
+              "fieldName": "src"
+            },
+            {
+              "name": "alt",
+              "type": {
+                "text": "string"
+              },
+              "default": "'User avatar'",
+              "description": "Alt text for the avatar image (important for accessibility).",
+              "fieldName": "alt"
+            },
+            {
+              "name": "initials",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The initials to display if the image is missing or fails to load.",
+              "fieldName": "initials"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "number"
+              },
+              "default": "40",
+              "description": "The size of the avatar in pixels.",
+              "fieldName": "size"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "prism-avatar",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "PrismAvatar",
+          "declaration": {
+            "name": "PrismAvatar",
+            "module": "src/components/foundations/prism-avatar.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "prism-avatar",
+          "declaration": {
+            "name": "PrismAvatar",
+            "module": "src/components/foundations/prism-avatar.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/foundations/prism-badge.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A small status indicator component, styled with glassmorphism.\nUsed to display states like success, warning, error, or info within tables or cards.",
+          "name": "PrismBadge",
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "'success' | 'warning' | 'error' | 'info' | 'default'"
+              },
+              "default": "'default'",
+              "description": "The status variant of the badge which determines its color scheme.",
+              "attribute": "variant"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "'success' | 'warning' | 'error' | 'info' | 'default'"
+              },
+              "default": "'default'",
+              "description": "The status variant of the badge which determines its color scheme.",
+              "fieldName": "variant"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "prism-badge",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "PrismBadge",
+          "declaration": {
+            "name": "PrismBadge",
+            "module": "src/components/foundations/prism-badge.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "prism-badge",
+          "declaration": {
+            "name": "PrismBadge",
+            "module": "src/components/foundations/prism-badge.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/foundations/prism-icon.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A lightweight SVG wrapper component that inherits the current text color.\nAccepts raw SVG string from lucide-static or utilizes the default slot.",
+          "name": "PrismIcon",
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "number"
+              },
+              "default": "24",
+              "description": "Defines the size of the icon (width and height).",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "icon",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "A string containing the raw full SVG element (e.g. from lucide-static).",
+              "attribute": "icon"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": {
+                "text": "number"
+              },
+              "default": "24",
+              "description": "Defines the size of the icon (width and height).",
+              "fieldName": "size"
+            },
+            {
+              "name": "icon",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "A string containing the raw full SVG element (e.g. from lucide-static).",
+              "fieldName": "icon"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "prism-icon",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "PrismIcon",
+          "declaration": {
+            "name": "PrismIcon",
+            "module": "src/components/foundations/prism-icon.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "prism-icon",
+          "declaration": {
+            "name": "PrismIcon",
+            "module": "src/components/foundations/prism-icon.ts"
           }
         }
       ]
@@ -4022,270 +4358,6 @@
           "declaration": {
             "name": "PrismToast",
             "module": "src/components/overlays/prism-toast.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/foundations/prism-avatar.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "User profile picture component.\nDisplays an image if `src` is provided, otherwise falls back to `initials`.\nHandles image loading errors by gracefully falling back to initials.",
-          "name": "PrismAvatar",
-          "members": [
-            {
-              "kind": "field",
-              "name": "src",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The URL of the avatar image.",
-              "attribute": "src"
-            },
-            {
-              "kind": "field",
-              "name": "alt",
-              "type": {
-                "text": "string"
-              },
-              "default": "'User avatar'",
-              "description": "Alt text for the avatar image (important for accessibility).",
-              "attribute": "alt"
-            },
-            {
-              "kind": "field",
-              "name": "initials",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The initials to display if the image is missing or fails to load.",
-              "attribute": "initials"
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "number"
-              },
-              "default": "40",
-              "description": "The size of the avatar in pixels.",
-              "attribute": "size"
-            },
-            {
-              "kind": "field",
-              "name": "_hasError",
-              "type": {
-                "text": "boolean"
-              },
-              "privacy": "private",
-              "default": "false"
-            },
-            {
-              "kind": "method",
-              "name": "_handleError",
-              "privacy": "private"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "src",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The URL of the avatar image.",
-              "fieldName": "src"
-            },
-            {
-              "name": "alt",
-              "type": {
-                "text": "string"
-              },
-              "default": "'User avatar'",
-              "description": "Alt text for the avatar image (important for accessibility).",
-              "fieldName": "alt"
-            },
-            {
-              "name": "initials",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The initials to display if the image is missing or fails to load.",
-              "fieldName": "initials"
-            },
-            {
-              "name": "size",
-              "type": {
-                "text": "number"
-              },
-              "default": "40",
-              "description": "The size of the avatar in pixels.",
-              "fieldName": "size"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "prism-avatar",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "PrismAvatar",
-          "declaration": {
-            "name": "PrismAvatar",
-            "module": "src/components/foundations/prism-avatar.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "prism-avatar",
-          "declaration": {
-            "name": "PrismAvatar",
-            "module": "src/components/foundations/prism-avatar.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/foundations/prism-badge.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "A small status indicator component, styled with glassmorphism.\nUsed to display states like success, warning, error, or info within tables or cards.",
-          "name": "PrismBadge",
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "'success' | 'warning' | 'error' | 'info' | 'default'"
-              },
-              "default": "'default'",
-              "description": "The status variant of the badge which determines its color scheme.",
-              "attribute": "variant"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "'success' | 'warning' | 'error' | 'info' | 'default'"
-              },
-              "default": "'default'",
-              "description": "The status variant of the badge which determines its color scheme.",
-              "fieldName": "variant"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "prism-badge",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "PrismBadge",
-          "declaration": {
-            "name": "PrismBadge",
-            "module": "src/components/foundations/prism-badge.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "prism-badge",
-          "declaration": {
-            "name": "PrismBadge",
-            "module": "src/components/foundations/prism-badge.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/foundations/prism-icon.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "A lightweight SVG wrapper component that inherits the current text color.\nAccepts raw SVG string from lucide-static or utilizes the default slot.",
-          "name": "PrismIcon",
-          "members": [
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "number"
-              },
-              "default": "24",
-              "description": "Defines the size of the icon (width and height).",
-              "attribute": "size"
-            },
-            {
-              "kind": "field",
-              "name": "icon",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "A string containing the raw full SVG element (e.g. from lucide-static).",
-              "attribute": "icon"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "size",
-              "type": {
-                "text": "number"
-              },
-              "default": "24",
-              "description": "Defines the size of the icon (width and height).",
-              "fieldName": "size"
-            },
-            {
-              "name": "icon",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "A string containing the raw full SVG element (e.g. from lucide-static).",
-              "fieldName": "icon"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "prism-icon",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "PrismIcon",
-          "declaration": {
-            "name": "PrismIcon",
-            "module": "src/components/foundations/prism-icon.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "prism-icon",
-          "declaration": {
-            "name": "PrismIcon",
-            "module": "src/components/foundations/prism-icon.ts"
           }
         }
       ]
