@@ -2,73 +2,63 @@
   <img src="./images/logo-bkg.png" alt="PrismUI Logo" width="300" />
 </div>
 
-# 🧊 PrismUI
+# PrismUI 2.0
 
-<p align="center">
-  <a href="https://www.npmjs.com/package/@fabrizio.manna/prismui"><img src="https://img.shields.io/npm/v/@fabrizio.manna/prismui?color=blue" alt="NPM Version" /></a>
-  <a href="https://www.npmjs.com/package/@fabrizio.manna/prismui"><img src="https://img.shields.io/npm/dm/@fabrizio.manna/prismui" alt="Downloads" /></a>
-  <a href="https://bundlephobia.com/package/@fabrizio.manna/prismui"><img src="https://img.shields.io/bundlephobia/minzip/@fabrizio.manna/prismui" alt="Bundle Size" /></a>
-  <img src="https://img.shields.io/npm/l/@fabrizio.manna/prismui" alt="License" />
-</p>
+> **Status:** 2.0.0 rewrite in progress on `feat/glassmorphism-framework`. Not published to npm (`"private": true`).
 
-**PrismUI** is a modern, framework-agnostic UI component library designed to bring the elegance of **Glassmorphism** to enterprise admin panels and data-rich dashboards. 
+**PrismUI** is an accessible, mobile-first **glassmorphism** web component framework built with
+[Lit 3](https://lit.dev/), [Tailwind CSS 4](https://tailwindcss.com/), [Vite 8](https://vite.dev/) and
+[Storybook 10](https://storybook.js.org/). Components are framework-agnostic custom elements with open shadow roots.
 
-Built on top of standard **Web Components** using [Lit](https://lit.dev/), styled with [Tailwind CSS](https://tailwindcss.com/), and bundled with [Vite](https://vitejs.dev/), PrismUI integrates seamlessly into any frontend stack—whether you are using React, Vue, Angular, Svelte, or plain Vanilla JavaScript.
+## Principles
 
-## ✨ Key Features
+- **Controlled components.** All meaningful state (`value`, `checked`, `open`, `page`, `sort`, …) comes from
+  properties. User interaction emits *request* events (`prism-change`, `prism-open-request`, `prism-close-request`,
+  `prism-sort-change`, `prism-filter-change`, `prism-page-change`, …); the component never changes those properties
+  by itself. Form controls also re-emit native `input` / `change` from the host, so `v-model` and Angular
+  `ngModel` / Reactive Forms work without adapters.
+- **Tokens only.** Components consume `var(--prism-*)` design tokens. The dark theme is the `.dark` class (or
+  `data-theme="dark"`) on any ancestor; there are no Tailwind `dark:` variants inside shadow DOM.
+- **Accessible glass.** Text sits only on surfaces that are at least 85% opaque in light and 90% in dark. Controls
+  have a dedicated border with at least 3:1 contrast. The focus indicator is a double ring (white inner ring, black
+  outer outline). Opaque fallbacks apply without `backdrop-filter` or with reduced transparency.
+- **Mobile first.** Touch targets are 44px by default; with a fine pointer, controls use 32/40/48px. Breakpoints
+  are 640 / 768 / 1024 / 1280 / 1536px, `min-width` only.
 
-- **🧊 Glassmorphism First:** Beautiful frosted glass effects, vibrant backdrop blurs, and translucent layouts that give depth to your interfaces.
-- **🌓 Native Dark Mode:** Flawless transition between bright, airy light themes and deep, glowing dark interfaces, fully integrated with Tailwind's dark mode.
-- **🧩 Framework Agnostic:** Write once, run everywhere. True Web Components encapsulated via Shadow DOM.
-- **📊 Admin & Dashboard Ready:** A curated set of components tailored for complex layouts, including collapsible sidebars, data tables, stat cards, and interactive forms.
-- **⚡ Developer Experience:** Fully typed with TypeScript, blazing fast builds powered by Vite, and automated docs generation.
+## Usage (once components land)
 
-## 📦 Component Catalog (In Progress)
+```html
+<link rel="stylesheet" href="@fabrizio.manna/prismui/tokens.css" />
+<script type="module">
+  import '@fabrizio.manna/prismui/button'; // registers <prism-button>
+</script>
+<html class="dark">
+  <!-- or data-theme="dark" -->
+</html>
+```
 
-### Foundations & Actions
-- `prism-button`: Multi-variant, loading states, and icon slots.
-- `prism-badge`: Status indicators (success, warning, error, info).
-- `prism-avatar`: User profile picture with fallback initials.
-- `prism-icon`: Lightweight SVG wrapper inheriting `currentColor`.
+## Development
 
-### Form & Data Entry
-- `prism-input`: High-density text inputs with error states and password toggles.
-- `prism-textarea`: Auto-resizing multi-line inputs.
-- `prism-select`: Custom dropdowns styled seamlessly with Glassmorphism.
-- `prism-checkbox`: Indeterminate state support for data tables.
-- `prism-radio` / `prism-radio-group`: Accessible radio buttons.
-- `prism-toggle`: Smooth animated boolean switches.
-- `prism-slider`: Custom styled range sliders.
-- `prism-file-upload`: Drag-and-drop zones for file selection.
+Requires Node.js 24+.
 
-### Navigation & Routing
-- `prism-sidebar`: Collapsible left navigation (expanded vs icon-only mode).
-- `prism-navbar`: Sticky top header with slots for search and actions.
-- `prism-menu` / `prism-menu-item`: Dropdown menus for profiles or generic actions.
-- `prism-tabs`: Horizontal navigation with animated active indicators.
-- `prism-breadcrumb`: Hierarchical page location display.
-- `prism-pagination`: Controls for data tables.
-- `prism-accordion`: Collapsible content sections with grid animations.
+```bash
+npm install
+npx playwright install chromium   # browser tests
+npm run storybook                 # http://localhost:6006
+npm run lint && npm run typecheck && npm run build && npm test
+```
 
-### Data Display & Tables
-- `prism-table`: Advanced data tables with sorting, pagination, and selection.
-- `prism-card`: Flexible Glassmorphism containers.
-- `prism-stat`: Dashboard metric cards with trend indicators.
-- `prism-progress`: Linear progress bars with glowing gradients.
-- `prism-tooltip`: Hover tooltip for extra contextual info.
+| Script                    | What it does                                                                       |
+| ------------------------- | ---------------------------------------------------------------------------------- |
+| `npm run lint`            | ESLint (TypeScript, Lit, WC, lit-a11y), CSS token guard, Prettier check            |
+| `npm run typecheck`       | TypeScript 7 (`tsc`) type check of sources, tests and configs                      |
+| `npm run build`           | Vite library build (ESM, one entry per component), `.d.ts`, Custom Elements Manifest |
+| `npm test`                | Vitest: `unit` (Node), `browser` (Playwright Chromium), `storybook` (stories + axe) |
+| `npm run storybook`       | Storybook dev server                                                               |
+| `npm run build-storybook` | Static Storybook in `storybook-static/`                                            |
 
-### Overlays & Feedback
-- `prism-modal`: Centered dialog overlays with frosted backdrops.
-- `prism-drawer`: Slide-out off-canvas panels for side content.
-- `prism-toast`: Floating snackbar notifications (success, error, etc.).
-- `prism-alert`: In-page static alert banners.
-- `prism-spinner`: Animated glowing loading indicator.
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for the folder layout, where tests and docs go, and the commit rules.
 
-## 🛠️ Tech Stack
+## License
 
-- **Core:** Lit & standard Web Components
-- **Styling:** Tailwind CSS v3/v4 (Shadow DOM injected)
-- **Tooling:** Vite & TypeScript
-- **Docs:** VitePress / Storybook
-- **CI/CD:** GitHub Actions & GitHub Pages
-- **Environment:** Node 26+ Required
+ISC
