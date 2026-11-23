@@ -128,6 +128,8 @@ export interface PrismPageChangeDetail {
 export interface PrismPageSizeChangeDetail {
   pageSize: number;
   previousPageSize: number;
+  /** Suggested page for the owner after a page-size change (always 1). */
+  page: 1;
   query?: PrismQuery;
 }
 
