@@ -21,6 +21,7 @@ jobs:
       - run: npx playwright install --with-deps chromium firefox webkit
       - run: npm run lint
       - run: npm run typecheck
+      - run: npm run tokens:contrast
       - run: npm run build
       - run: npm test
       - run: npm run build-storybook

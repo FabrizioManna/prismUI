@@ -42,6 +42,7 @@
     "analyze": "cem analyze --config custom-elements-manifest.config.mjs",
     "tokens:sync": "node scripts/sync-tokens.mjs && node scripts/generate-token-types.mjs",
     "tokens:types": "node scripts/generate-token-types.mjs",
+    "tokens:contrast": "python3 scripts/contrast.py",
     "lint": "eslint . && node scripts/lint-styles.mjs && prettier --check .",
     "lint:fix": "eslint . --fix && prettier --write .",
     "format": "prettier --write .",
@@ -53,7 +54,8 @@
     "test:coverage": "vitest run --coverage",
     "storybook": "npm run analyze && storybook dev -p 6006",
     "build-storybook": "npm run analyze && storybook build",
-    "check": "npm run lint && npm run typecheck && npm run build && npm run test"
+    "check": "npm run lint && npm run typecheck && npm run tokens:contrast && npm run build && npm run test",
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
