@@ -1,0 +1,108 @@
+@import '../../styles/theme.css';
+
+:host {
+  display: block;
+}
+.form-control {
+  display: flex;
+  flex-direction: column;
+  gap: var(--prism-space-1);
+  min-inline-size: 0;
+}
+.label {
+  font-size: var(--prism-text-sm);
+  font-weight: var(--prism-weight-medium);
+  color: var(--prism-color-text-primary);
+}
+.required {
+  color: var(--prism-color-danger);
+  margin-inline-start: var(--prism-space-1);
+}
+.base {
+  display: flex;
+  --_border: var(--prism-textarea-border-color, var(--prism-control-border));
+  background: var(--prism-textarea-bg, var(--prism-glass-surface-solid-1));
+  border: 0;
+  box-shadow: inset 0 0 0 var(--prism-control-border-width) var(--_border);
+  border-radius: var(--prism-textarea-radius, var(--prism-radius-lg));
+  color: var(--prism-color-text-primary);
+}
+:host([appearance='filled']) .base {
+  background: var(--prism-textarea-bg, var(--prism-glass-surface-solid-2));
+}
+@media (hover: hover) {
+  .base:hover {
+    --_border: var(--prism-textarea-border-color-hover, var(--prism-control-border-hover));
+  }
+}
+.base:has(.textarea:focus-visible) {
+  --_border: var(--prism-textarea-border-color-focus, var(--prism-control-border-focus));
+  outline: var(--prism-focus-ring-width) solid var(--prism-focus-ring-outer);
+  outline-offset: var(--prism-focus-ring-offset);
+  box-shadow:
+    inset 0 0 0 var(--prism-control-border-width) var(--_border),
+    0 0 0 var(--prism-focus-ring-width) var(--prism-focus-ring-inner);
+}
+.base[data-invalid] {
+  --_border: var(--prism-color-danger);
+}
+:host([disabled]) .base {
+  opacity: var(--prism-state-disabled-opacity);
+  --_border: var(--prism-control-border-disabled);
+}
+.textarea {
+  flex: 1 1 auto;
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-block-size: var(--prism-textarea-min-height, var(--prism-target-min));
+  max-block-size: var(--prism-textarea-max-height, 50dvh);
+  padding: var(--prism-textarea-padding, var(--prism-space-2) var(--prism-space-3));
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: var(--prism-text-md); /* >= 16px: no iOS zoom on focus */
+  line-height: 1.5;
+  resize: vertical;
+}
+:host([resize='none']) .textarea,
+:host([resize='auto']) .textarea {
+  resize: none;
+  overflow-y: auto;
+}
+.textarea:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+.textarea::placeholder {
+  color: var(--prism-color-text-muted);
+  opacity: 1;
+}
+.below {
+  display: flex;
+  gap: var(--prism-space-2);
+  justify-content: space-between;
+  font-size: var(--prism-text-sm);
+}
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: var(--prism-space-1);
+}
+.help {
+  color: var(--prism-color-text-secondary);
+}
+.error {
+  display: flex;
+  align-items: center;
+  gap: var(--prism-space-1);
+  color: var(--prism-color-danger);
+}
+.counter {
+  color: var(--prism-color-text-secondary);
+  margin-inline-start: auto;
+  font-variant-numeric: tabular-nums;
+}
+[hidden] {
+  display: none !important;
+}
