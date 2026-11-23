@@ -1,0 +1,150 @@
+@import '../../styles/theme.css';
+
+:host {
+  display: block;
+  --_height: var(--prism-input-height, var(--prism-control-height-md));
+}
+:host([size='sm']) {
+  --_height: var(--prism-input-height, var(--prism-control-height-sm));
+}
+:host([size='lg']) {
+  --_height: var(--prism-input-height, var(--prism-control-height-lg));
+}
+.form-control {
+  display: flex;
+  flex-direction: column;
+  gap: var(--prism-space-1);
+  min-inline-size: 0;
+}
+.label {
+  font-size: var(--prism-text-sm);
+  font-weight: var(--prism-weight-medium);
+  color: var(--prism-color-text-primary);
+}
+.required {
+  color: var(--prism-color-danger);
+  margin-inline-start: var(--prism-space-1);
+}
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--prism-space-1);
+  min-block-size: max(var(--_height), var(--prism-target-min));
+  padding-inline: var(--prism-space-3) var(--prism-space-1);
+  background: var(--prism-input-bg, var(--prism-glass-surface-solid-1));
+  /* Border drawn inset so the inner input keeps the full control height (hit area). */
+  --_border: var(--prism-input-border-color, var(--prism-control-border));
+  border: 0;
+  box-shadow: inset 0 0 0 var(--prism-control-border-width) var(--_border);
+  border-radius: var(--prism-input-radius, var(--prism-radius-lg));
+  color: var(--prism-input-color, var(--prism-color-text-primary));
+  transition: border-color var(--prism-duration-fast) var(--prism-ease-standard);
+}
+:host([appearance='filled']) .wrapper {
+  background: var(--prism-input-bg, var(--prism-glass-surface-solid-2));
+}
+@media (hover: hover) {
+  .wrapper:hover {
+    --_border: var(--prism-control-border-hover);
+  }
+}
+.wrapper:has(.input:focus-visible) {
+  --_border: var(--prism-input-border-color-focus, var(--prism-control-border-focus));
+  outline: var(--prism-focus-ring-width) solid var(--prism-focus-ring-outer);
+  outline-offset: var(--prism-focus-ring-offset);
+  box-shadow:
+    inset 0 0 0 var(--prism-control-border-width) var(--_border),
+    0 0 0 var(--prism-focus-ring-width) var(--prism-focus-ring-inner);
+}
+.wrapper[data-invalid] {
+  --_border: var(--prism-color-danger);
+}
+:host([disabled]) .wrapper {
+  opacity: var(--prism-state-disabled-opacity);
+  --_border: var(--prism-control-border-disabled);
+}
+.input {
+  flex: 1 1 auto;
+  min-inline-size: 0;
+  align-self: stretch;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: var(--prism-text-md); /* >= 16px: no iOS zoom on focus */
+  outline: none;
+}
+.input:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+.input::placeholder {
+  color: var(--prism-input-placeholder-color, var(--prism-color-text-muted));
+  opacity: 1;
+}
+.affix {
+  display: inline-flex;
+  color: var(--prism-color-text-secondary);
+}
+.icon-button {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  inline-size: var(--prism-target-min);
+  block-size: var(--prism-target-min);
+  padding: 0;
+  border: 0;
+  border-radius: var(--prism-radius-md);
+  background: transparent;
+  color: var(--prism-color-text-secondary);
+  cursor: pointer;
+}
+.icon-button prism-icon {
+  pointer-events: none;
+}
+.icon-button:focus-visible {
+  outline: var(--prism-focus-ring-width) solid var(--prism-focus-ring-outer);
+  outline-offset: calc(-1 * var(--prism-focus-ring-width));
+  box-shadow: inset 0 0 0 calc(2 * var(--prism-focus-ring-width)) var(--prism-focus-ring-inner);
+}
+@media (hover: hover) {
+  .icon-button:hover {
+    color: var(--prism-color-text-primary);
+  }
+}
+.below {
+  display: flex;
+  gap: var(--prism-space-2);
+  justify-content: space-between;
+  font-size: var(--prism-text-sm);
+}
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: var(--prism-space-1);
+}
+.help {
+  color: var(--prism-color-text-secondary);
+}
+.error {
+  display: flex;
+  align-items: center;
+  gap: var(--prism-space-1);
+  color: var(--prism-color-danger);
+}
+.counter {
+  color: var(--prism-color-text-secondary);
+  margin-inline-start: auto;
+  font-variant-numeric: tabular-nums;
+}
+@media (min-width: 768px) {
+  :host([label-position='start']) .form-control {
+    display: grid;
+    grid-template-columns: minmax(8rem, max-content) 1fr;
+    column-gap: var(--prism-space-3);
+    align-items: center;
+  }
+  :host([label-position='start']) .below {
+    grid-column: 2;
+  }
+}

@@ -56,4 +56,9 @@ export default tseslint.config(
       ],
     },
   },
+  {
+    // QA acceptance suites and helpers poke at internals of shadow roots and CDP payloads.
+    files: ['test/qa/**/*.ts', 'src/components/**/prism-*.test.ts'],
+    rules: { '@typescript-eslint/no-explicit-any': 'off', '@typescript-eslint/no-non-null-assertion': 'off' },
+  },
 );

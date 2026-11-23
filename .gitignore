@@ -33,3 +33,6 @@ playwright-report
 # Antigravity artifacts
 .system_generated
 .antygravity/prompt.md
+
+# Vitest browser attachments
+.vitest/

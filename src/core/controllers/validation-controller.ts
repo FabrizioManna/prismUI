@@ -25,7 +25,8 @@ export class ValidationController implements ReactiveController {
   }
 
   private readonly onInvalid = (event: Event) => {
-    event.preventDefault(); // components render their own error; no native bubble duplication
+    // No preventDefault(): it would also cancel the browser focusing the anchor (reportValidity / submit).
+    void event;
     this.touched = true;
     const validity = this.host.validity;
     if (validity) emit(this.host, 'prism-invalid', { validity, message: this.host.validationMessage });
