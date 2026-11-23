@@ -1,0 +1,189 @@
+@import '../../styles/theme.css';
+
+:host {
+  display: block;
+  --_height: var(--prism-control-height-md);
+}
+:host([size='sm']) {
+  --_height: var(--prism-control-height-sm);
+}
+:host([size='lg']) {
+  --_height: var(--prism-control-height-lg);
+}
+.form-control {
+  display: flex;
+  flex-direction: column;
+  gap: var(--prism-space-1);
+  min-inline-size: 0;
+}
+.label {
+  font-size: var(--prism-text-sm);
+  font-weight: var(--prism-weight-medium);
+  color: var(--prism-color-text-primary);
+}
+.required {
+  color: var(--prism-color-danger);
+  margin-inline-start: var(--prism-space-1);
+}
+.combobox {
+  display: flex;
+  align-items: center;
+  gap: var(--prism-space-2);
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-block-size: max(var(--_height), var(--prism-target-min));
+  padding-inline: var(--prism-space-3);
+  background: var(--prism-glass-surface-solid-1);
+  border: 0;
+  box-shadow: inset 0 0 0 var(--prism-control-border-width) var(--prism-control-border);
+  border-radius: var(--prism-select-radius, var(--prism-radius-lg));
+  color: var(--prism-color-text-primary);
+  font: inherit;
+  font-size: var(--prism-text-md);
+  cursor: pointer;
+  text-align: start;
+}
+input.combobox {
+  cursor: text;
+}
+.combobox[data-invalid],
+input.combobox[aria-invalid='true'] {
+  box-shadow: inset 0 0 0 var(--prism-control-border-width) var(--prism-color-danger);
+}
+:host([disabled]) .combobox {
+  opacity: var(--prism-state-disabled-opacity);
+  cursor: not-allowed;
+}
+.display {
+  flex: 1 1 auto;
+  min-inline-size: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.display[data-placeholder] {
+  color: var(--prism-color-text-secondary);
+}
+.chevron {
+  flex: none;
+  pointer-events: none;
+}
+.listbox {
+  position: fixed;
+  inset: auto;
+  margin: 0;
+  box-sizing: border-box;
+  max-block-size: min(20rem, 60vh);
+  overflow: auto;
+  padding: var(--prism-space-1);
+  border: var(--prism-control-border-width) solid var(--prism-control-border);
+  border-radius: var(--prism-radius-lg);
+  background: var(--prism-glass-surface-solid-3);
+  color: var(--prism-color-text-primary);
+}
+.option {
+  display: flex;
+  align-items: center;
+  gap: var(--prism-space-2);
+  min-block-size: var(--prism-target-min);
+  padding-inline: var(--prism-space-3);
+  border-radius: var(--prism-radius-md);
+  cursor: pointer;
+}
+.option-label {
+  flex: 1 1 auto;
+}
+.option[data-active] {
+  background: var(--prism-color-primary-subtle);
+  color: var(--prism-color-on-primary-subtle);
+  outline: var(--prism-focus-ring-width) solid var(--prism-focus-ring-outer);
+  outline-offset: calc(-1 * var(--prism-focus-ring-width));
+}
+.option[aria-disabled='true'] {
+  opacity: var(--prism-state-disabled-opacity);
+  cursor: not-allowed;
+}
+.group-label {
+  padding: var(--prism-space-2) var(--prism-space-3) var(--prism-space-1);
+  font-size: var(--prism-text-sm);
+  font-weight: var(--prism-weight-medium);
+  color: var(--prism-color-text-secondary);
+}
+.empty {
+  padding: var(--prism-space-3);
+  color: var(--prism-color-text-secondary);
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--prism-space-1);
+}
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--prism-space-1);
+  padding-inline-start: var(--prism-space-2);
+  border-radius: var(--prism-radius-full);
+  background: var(--prism-glass-surface-solid-2);
+  font-size: var(--prism-text-sm);
+}
+.tag-remove,
+.sheet-close {
+  display: inline-grid;
+  place-items: center;
+  min-inline-size: var(--prism-target-min);
+  min-block-size: var(--prism-target-min);
+  padding: 0;
+  border: 0;
+  border-radius: var(--prism-radius-full);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.sheet {
+  position: fixed;
+  inset: auto 0 0 0;
+  margin: 0;
+  box-sizing: border-box;
+  inline-size: 100%;
+  max-inline-size: 100%;
+  max-block-size: 85vh;
+  padding: var(--prism-space-3);
+  border: 0;
+  border-radius: var(--prism-radius-lg) var(--prism-radius-lg) 0 0;
+  background: var(--prism-glass-surface-solid-3);
+  color: var(--prism-color-text-primary);
+}
+.sheet::backdrop {
+  background: var(--prism-scrim);
+}
+.sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--prism-space-2);
+}
+.sheet-title {
+  font-weight: var(--prism-weight-medium);
+}
+.sheet .listbox {
+  position: static;
+  border: 0;
+  max-block-size: 70vh;
+  background: transparent;
+}
+.sheet .option {
+  min-block-size: var(--prism-target-min-touch);
+}
+.error {
+  font-size: var(--prism-text-sm);
+  color: var(--prism-color-danger);
+}
+.help {
+  font-size: var(--prism-text-sm);
+  color: var(--prism-color-text-secondary);
+}
+[hidden] {
+  display: none !important;
+}

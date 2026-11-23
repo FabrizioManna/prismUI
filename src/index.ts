@@ -7,3 +7,4 @@ export * from './components/icon/define.js';
 export * from './components/spinner/define.js';
 export * from './components/button/define.js';
 export * from './components/input/define.js';
+export * from './components/select/define.js';
