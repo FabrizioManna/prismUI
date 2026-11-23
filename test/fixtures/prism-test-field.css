@@ -1,0 +1,8 @@
+@import 'tailwindcss/utilities.css' layer(utilities) source(none);
+@import '../../src/styles/theme.css';
+@import '../../src/styles/utilities.css';
+@source './prism-test-field.ts';
+
+:host {
+  display: block;
+}

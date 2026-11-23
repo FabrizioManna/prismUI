@@ -1,0 +1,93 @@
+/*
+ * Tailwind v4 theme for prismUI components: mapping only, no values.
+ * Every utility resolves to an inherited var(--prism-*) token (architecture.md §4.3, visual-tokens.md §5).
+ * Import it from a component stylesheet (see src/styles/component-template.css); never from the light DOM.
+ */
+@theme {
+  /* Reset Tailwind defaults: bg-blue-500, shadow-lg, etc. must not exist. */
+  --*: initial;
+
+  /* Breakpoints: copied in clear from --prism-bp-* (var() is not valid inside @media). Mobile first, min-width only. */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+@theme inline {
+  --color-fg: var(--prism-color-text-primary);
+  --color-fg-secondary: var(--prism-color-text-secondary);
+  --color-fg-muted: var(--prism-color-text-muted);
+  --color-fg-inverse: var(--prism-color-text-inverse);
+  --color-link: var(--prism-color-link);
+
+  --color-primary: var(--prism-color-primary);
+  --color-primary-hover: var(--prism-color-primary-hover);
+  --color-primary-on: var(--prism-color-primary-on);
+  --color-success: var(--prism-color-success);
+  --color-success-on: var(--prism-color-success-on);
+  --color-success-subtle: var(--prism-color-success-subtle);
+  --color-success-on-subtle: var(--prism-color-success-on-subtle);
+  --color-warning: var(--prism-color-warning);
+  --color-warning-on: var(--prism-color-warning-on);
+  --color-warning-subtle: var(--prism-color-warning-subtle);
+  --color-warning-on-subtle: var(--prism-color-warning-on-subtle);
+  --color-danger: var(--prism-color-danger);
+  --color-danger-on: var(--prism-color-danger-on);
+  --color-danger-subtle: var(--prism-color-danger-subtle);
+  --color-danger-on-subtle: var(--prism-color-danger-on-subtle);
+  --color-info: var(--prism-color-info);
+  --color-info-on: var(--prism-color-info-on);
+  --color-info-subtle: var(--prism-color-info-subtle);
+  --color-info-on-subtle: var(--prism-color-info-on-subtle);
+
+  --color-surface-0: var(--prism-glass-surface-solid-0);
+  --color-surface-1: var(--prism-glass-surface-solid-1);
+  --color-surface-2: var(--prism-glass-surface-solid-2);
+  --color-surface-3: var(--prism-glass-surface-solid-3);
+  --color-surface-4: var(--prism-glass-surface-solid-4);
+  --color-control-border: var(--prism-control-border);
+  --color-control-border-hover: var(--prism-control-border-hover);
+  --color-control-border-focus: var(--prism-control-border-focus);
+  --color-control-border-disabled: var(--prism-control-border-disabled);
+
+  --radius-none: var(--prism-radius-none);
+  --radius-sm: var(--prism-radius-sm);
+  --radius-md: var(--prism-radius-md);
+  --radius-lg: var(--prism-radius-lg);
+  --radius-xl: var(--prism-radius-xl);
+  --radius-2xl: var(--prism-radius-2xl);
+  --radius-full: var(--prism-radius-full);
+
+  --blur-sm: var(--prism-glass-blur-sm);
+  --blur-md: var(--prism-glass-blur-md);
+  --blur-lg: var(--prism-glass-blur-lg);
+  --blur-xl: var(--prism-glass-blur-xl);
+
+  --spacing: var(--prism-space-unit);
+
+  --font-sans: var(--prism-font-sans);
+  --font-mono: var(--prism-font-mono);
+  --text-xs: var(--prism-text-xs);
+  --text-sm: var(--prism-text-sm);
+  --text-base: var(--prism-text-md);
+  --text-lg: var(--prism-text-lg);
+  --text-xl: var(--prism-text-xl);
+  --text-2xl: var(--prism-text-2xl);
+  --leading-none: var(--prism-leading-none);
+  --leading-tight: var(--prism-leading-tight);
+  --leading-snug: var(--prism-leading-snug);
+  --leading-normal: var(--prism-leading-normal);
+  --leading-relaxed: var(--prism-leading-relaxed);
+  --font-weight-regular: var(--prism-weight-regular);
+  --font-weight-medium: var(--prism-weight-medium);
+  --font-weight-semibold: var(--prism-weight-semibold);
+  --font-weight-bold: var(--prism-weight-bold);
+
+  --ease-standard: var(--prism-ease-standard);
+  --ease-emphasized: var(--prism-ease-emphasized);
+}
+
+/* Pointer refinement used by mobile-first components: `fine:h-…` applies only with a precise pointer. */
+@custom-variant fine (@media (pointer: fine));

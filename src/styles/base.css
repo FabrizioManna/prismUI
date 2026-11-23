@@ -1,0 +1,66 @@
+/*
+ * Base stylesheet shared by every prismUI shadow root (one CSSStyleSheet for all instances).
+ * Plain CSS on --prism-* tokens: no Tailwind preflight, no theme variants.
+ */
+:host {
+  box-sizing: border-box;
+  font-family: var(--prism-font-sans);
+  color: var(--prism-color-text-primary);
+  -webkit-tap-highlight-color: transparent;
+}
+
+:host([hidden]) {
+  display: none !important;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* Visually hidden but available to assistive technology. */
+.sr-only {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Double focus ring on the element that receives focus inside the shadow root. */
+[data-focus-target]:focus-visible,
+.focus-ring:focus-visible {
+  outline: var(--prism-focus-ring-width) solid var(--prism-focus-ring-outer);
+  outline-offset: var(--prism-focus-ring-offset);
+  box-shadow: 0 0 0 var(--prism-focus-ring-width) var(--prism-focus-ring-inner);
+}
+
+[data-focus-target]:focus:not(:focus-visible),
+.focus-ring:focus:not(:focus-visible) {
+  outline: none;
+}
+
+@media (forced-colors: active) {
+  [data-focus-target]:focus-visible,
+  .focus-ring:focus-visible {
+    outline: 3px solid Highlight;
+    box-shadow: none;
+  }
+}
+
+/* Fallback for engines without backdrop-filter: tokens already switch to opaque surfaces;
+   this guards against any stray translucent background set by a component. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass-fallback {
+    background-color: var(--prism-surface-opaque-0);
+  }
+}

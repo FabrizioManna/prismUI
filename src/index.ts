@@ -1,0 +1,5 @@
+/**
+ * prismUI 2.0 "all-in" entry point: registers every component and re-exports classes and types.
+ * Components are added here as `export * from './components/<name>/define.js';` when they land.
+ */
+export * from './core/index.js';

@@ -1,0 +1,19 @@
+/* Storybook canvas only: page backdrops for visual and contrast checks. */
+html {
+  min-block-size: 100%;
+  background: var(--prism-bg-gradient);
+  color: var(--prism-color-text-primary);
+  font-family: var(--prism-font-sans);
+}
+html[data-sb-backdrop='white'] {
+  background: #ffffff;
+}
+html[data-sb-backdrop='black'] {
+  background: #000000;
+}
+html[data-sb-backdrop='gray'] {
+  background: #808080;
+}
+body {
+  background: transparent;
+}

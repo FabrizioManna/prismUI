@@ -1,0 +1,15 @@
+/*
+ * Template for a component stylesheet (copy to src/components/<name>/prism-<name>.css).
+ * Tailwind v4 compiles ONLY the classes used by that component (source(none) + @source), so importing
+ * one component never ships the utilities of another (architecture.md §4.3).
+ *
+ *   @import "tailwindcss/utilities.css" layer(utilities) source(none);
+ *   @import "../../styles/theme.css";
+ *   @import "../../styles/utilities.css";
+ *   @source "./prism-<name>.ts";
+ *
+ *   :host { display: inline-flex; }
+ *
+ * Rules: no `dark:` variants, no arbitrary values (`w-[342px]`), logical properties only (ms-*, ps-*).
+ * Theme and state go through var(--prism-*) and :host([attr]) / :host(:state(x)) selectors.
+ */

@@ -1,0 +1,9 @@
+dist
+storybook-static
+coverage
+node_modules
+package-lock.json
+.antygravity
+src/tokens/prism-tokens.css
+# Markdown docs are written by several agents; not enforced by prettier --check
+*.md

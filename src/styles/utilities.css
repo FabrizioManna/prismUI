@@ -1,0 +1,103 @@
+/*
+ * Shared Tailwind @utility definitions for component stylesheets (architecture.md §4.3 rule 1).
+ * Appearance (glass, focus ring, hit area) is written in explicit CSS on --prism-* tokens and never uses
+ * Tailwind's --tw-* variables, which rely on @property (ignored inside shadow roots, tailwindcss#15005).
+ */
+
+/* Text-bearing glass surfaces (alpha >= .85 light / >= .90 dark). Use these for anything with text. */
+@utility glass-0 {
+  background-color: var(--prism-glass-surface-solid-0);
+  -webkit-backdrop-filter: blur(var(--prism-glass-blur-md)) saturate(var(--prism-glass-saturate));
+  backdrop-filter: blur(var(--prism-glass-blur-md)) saturate(var(--prism-glass-saturate));
+  border: var(--prism-glass-border-width) solid var(--prism-glass-border);
+  box-shadow: var(--prism-effect-highlight); /* --prism-shadow-0 is `none`: not composable in a shadow list */
+}
+
+@utility glass-1 {
+  background-color: var(--prism-glass-surface-solid-1);
+  -webkit-backdrop-filter: blur(var(--prism-glass-blur-md)) saturate(var(--prism-glass-saturate));
+  backdrop-filter: blur(var(--prism-glass-blur-md)) saturate(var(--prism-glass-saturate));
+  border: var(--prism-glass-border-width) solid var(--prism-glass-border);
+  box-shadow: var(--prism-effect-highlight), var(--prism-shadow-1);
+}
+
+@utility glass-2 {
+  background-color: var(--prism-glass-surface-solid-2);
+  -webkit-backdrop-filter: blur(var(--prism-glass-blur-md)) saturate(var(--prism-glass-saturate));
+  backdrop-filter: blur(var(--prism-glass-blur-md)) saturate(var(--prism-glass-saturate));
+  border: var(--prism-glass-border-width) solid var(--prism-glass-border);
+  box-shadow: var(--prism-effect-highlight), var(--prism-shadow-2);
+}
+
+@utility glass-3 {
+  background-color: var(--prism-glass-surface-solid-3);
+  -webkit-backdrop-filter: blur(var(--prism-glass-blur-md)) saturate(var(--prism-glass-saturate));
+  backdrop-filter: blur(var(--prism-glass-blur-md)) saturate(var(--prism-glass-saturate));
+  border: var(--prism-glass-border-width) solid var(--prism-glass-border);
+  box-shadow: var(--prism-effect-highlight), var(--prism-shadow-3);
+}
+
+@utility glass-4 {
+  background-color: var(--prism-glass-surface-solid-4);
+  -webkit-backdrop-filter: blur(var(--prism-glass-blur-md)) saturate(var(--prism-glass-saturate));
+  backdrop-filter: blur(var(--prism-glass-blur-md)) saturate(var(--prism-glass-saturate));
+  border: var(--prism-glass-border-width) solid var(--prism-glass-border);
+  box-shadow: var(--prism-effect-highlight), var(--prism-shadow-4);
+}
+
+/* Decorative glass: chrome and empty panels only, never text. */
+@utility glass-deco-0 {
+  background-color: var(--prism-glass-surface-deco-0);
+  -webkit-backdrop-filter: blur(var(--prism-glass-blur-lg)) saturate(var(--prism-glass-saturate));
+  backdrop-filter: blur(var(--prism-glass-blur-lg)) saturate(var(--prism-glass-saturate));
+}
+
+@utility glass-deco-1 {
+  background-color: var(--prism-glass-surface-deco-1);
+  -webkit-backdrop-filter: blur(var(--prism-glass-blur-lg)) saturate(var(--prism-glass-saturate));
+  backdrop-filter: blur(var(--prism-glass-blur-lg)) saturate(var(--prism-glass-saturate));
+}
+
+@utility glass-deco-2 {
+  background-color: var(--prism-glass-surface-deco-2);
+  -webkit-backdrop-filter: blur(var(--prism-glass-blur-lg)) saturate(var(--prism-glass-saturate));
+  backdrop-filter: blur(var(--prism-glass-blur-lg)) saturate(var(--prism-glass-saturate));
+}
+
+@utility glass-deco-3 {
+  background-color: var(--prism-glass-surface-deco-3);
+  -webkit-backdrop-filter: blur(var(--prism-glass-blur-lg)) saturate(var(--prism-glass-saturate));
+  backdrop-filter: blur(var(--prism-glass-blur-lg)) saturate(var(--prism-glass-saturate));
+}
+
+@utility glass-deco-4 {
+  background-color: var(--prism-glass-surface-deco-4);
+  -webkit-backdrop-filter: blur(var(--prism-glass-blur-lg)) saturate(var(--prism-glass-saturate));
+  backdrop-filter: blur(var(--prism-glass-blur-lg)) saturate(var(--prism-glass-saturate));
+}
+
+/* Control boundary >= 3:1 (WCAG 1.4.11). */
+@utility control-border {
+  border: var(--prism-control-border-width) solid var(--prism-control-border);
+}
+
+/* Double focus ring: outer = outline (survives forced-colors), inner = box-shadow. */
+@utility focus-ring {
+  &:focus-visible {
+    outline: var(--prism-focus-ring-width) solid var(--prism-focus-ring-outer);
+    outline-offset: var(--prism-focus-ring-offset);
+    box-shadow: 0 0 0 var(--prism-focus-ring-width) var(--prism-focus-ring-inner);
+  }
+  @media (forced-colors: active) {
+    &:focus-visible {
+      outline: 3px solid Highlight;
+      box-shadow: none;
+    }
+  }
+}
+
+/* Minimum target size: 44px on touch (default), 24px with a fine pointer (WCAG 2.5.8). */
+@utility hit-area {
+  min-block-size: var(--prism-target-min);
+  min-inline-size: var(--prism-target-min);
+}
