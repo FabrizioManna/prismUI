@@ -1,0 +1,64 @@
+@import '../../styles/theme.css';
+
+:host {
+  --_size: var(--prism-spinner-size, 24px);
+  display: inline-flex;
+  vertical-align: middle;
+  color: var(--prism-spinner-color, currentColor);
+}
+:host([size='xs']) {
+  --_size: var(--prism-spinner-size, 12px);
+}
+:host([size='sm']) {
+  --_size: var(--prism-spinner-size, 16px);
+}
+:host([size='lg']) {
+  --_size: var(--prism-spinner-size, 32px);
+}
+:host([size='xl']) {
+  --_size: var(--prism-spinner-size, 48px);
+}
+.base {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--prism-space-2);
+}
+.base[data-hidden] svg {
+  visibility: hidden;
+}
+svg {
+  inline-size: var(--_size);
+  block-size: var(--_size);
+  flex: none;
+  animation: prism-spin var(--prism-spinner-duration, 0.8s) linear infinite;
+}
+circle {
+  fill: none;
+  stroke-width: var(--prism-spinner-thickness, 3);
+}
+.track {
+  stroke: var(--prism-spinner-track-color, var(--prism-control-border-disabled));
+}
+.indicator {
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-dasharray: 30 100;
+}
+.label {
+  font-size: var(--prism-text-sm);
+}
+@keyframes prism-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes prism-pulse {
+  50% {
+    opacity: 0.4;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  svg {
+    animation: prism-pulse 2s ease-in-out infinite;
+  }
+}

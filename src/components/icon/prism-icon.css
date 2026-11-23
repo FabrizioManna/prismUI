@@ -1,0 +1,37 @@
+@import '../../styles/theme.css';
+
+:host {
+  --_size: var(--prism-icon-size, 1em);
+  display: inline-flex;
+  flex: none;
+  inline-size: var(--_size);
+  block-size: var(--_size);
+  color: var(--prism-icon-color, currentColor);
+  vertical-align: -0.125em;
+}
+:host([size='xs']) {
+  --_size: var(--prism-icon-size, 12px);
+}
+:host([size='sm']) {
+  --_size: var(--prism-icon-size, 16px);
+}
+:host([size='md']) {
+  --_size: var(--prism-icon-size, 20px);
+}
+:host([size='lg']) {
+  --_size: var(--prism-icon-size, 24px);
+}
+:host([size='xl']) {
+  --_size: var(--prism-icon-size, 32px);
+}
+.base {
+  display: contents;
+}
+svg {
+  inline-size: 100%;
+  block-size: 100%;
+  stroke-width: var(--prism-icon-stroke-width, 2);
+}
+:host([mirror-rtl]:dir(rtl)) svg {
+  transform: scaleX(-1);
+}
