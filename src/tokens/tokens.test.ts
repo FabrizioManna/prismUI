@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { cdp } from 'vitest/browser';
+import { commands } from 'vitest/browser';
+import '../../test/commands/emulate-media.js';
 import { PrismElement } from '../core/prism-element.js';
 
 const read = (name: string, el: Element = document.documentElement) =>
@@ -63,7 +64,7 @@ describe('prism-tokens.css', () => {
       document.documentElement.classList.remove('dark');
       document.documentElement.removeAttribute('data-theme');
       document.body.replaceChildren();
-      await cdp().send('Emulation.setEmulatedMedia', { features: [] });
+      await commands.emulateMedia({ colorScheme: null });
     });
 
     const probe = (attrs: Record<string, string>, parent: Element = document.body) => {
@@ -85,10 +86,10 @@ describe('prism-tokens.css', () => {
 
     it('[data-theme="auto"] follows prefers-color-scheme', async () => {
       const auto = probe({ 'data-theme': 'auto' });
-      await cdp().send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-color-scheme', value: 'light' }] });
-      expect(read('color-scheme', auto)).toBe('light');
-      await cdp().send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-color-scheme', value: 'dark' }] });
-      expect(read('color-scheme', auto)).toBe('dark');
+      await commands.emulateMedia({ colorScheme: 'light' });
+      await expect.poll(() => read('color-scheme', auto)).toBe('light');
+      await commands.emulateMedia({ colorScheme: 'dark' });
+      await expect.poll(() => read('color-scheme', auto)).toBe('dark');
       const dark = probe({ 'data-theme': 'dark' });
       expect(read('--prism-color-text-primary', auto)).toBe(read('--prism-color-text-primary', dark));
     });

@@ -2,6 +2,7 @@ import { defineConfig, mergeConfig } from 'vitest/config';
 import { playwright } from '@vitest/browser-playwright';
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 import viteConfig from './vite.config';
+import { emulateMedia } from './test/commands/emulate-media';
 
 /**
  * Browsers for the component project. Locally only Chromium is required; CI sets
@@ -37,6 +38,7 @@ export default mergeConfig(
               headless: true,
               provider: playwright(),
               instances: browsers.map((browser) => ({ browser })),
+              commands: { emulateMedia },
             },
           },
         },
