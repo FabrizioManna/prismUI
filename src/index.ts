@@ -5,3 +5,4 @@
 export * from './core/index.js';
 export * from './components/icon/define.js';
 export * from './components/spinner/define.js';
+export * from './components/button/define.js';

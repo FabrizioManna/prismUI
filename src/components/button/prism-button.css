@@ -1,0 +1,138 @@
+@import '../../styles/theme.css';
+
+:host {
+  display: inline-flex;
+  vertical-align: middle;
+  --_height: var(--prism-button-height, var(--prism-control-height-md));
+  --_pad: var(--prism-button-padding-inline, var(--prism-control-padding-inline-md));
+  --_bg: var(--prism-button-bg, var(--prism-color-primary));
+  --_bg-hover: var(--prism-button-bg-hover, var(--prism-color-primary-hover));
+  --_color: var(--prism-button-color, var(--prism-color-primary-on));
+  --_border: var(--prism-button-border-color, transparent);
+  --_glow: var(--prism-button-glow, var(--prism-shadow-glow-primary));
+}
+:host([size='sm']) {
+  --_height: var(--prism-button-height, var(--prism-control-height-sm));
+  --_pad: var(--prism-button-padding-inline, var(--prism-control-padding-inline-sm));
+}
+:host([size='lg']) {
+  --_height: var(--prism-button-height, var(--prism-control-height-lg));
+  --_pad: var(--prism-button-padding-inline, var(--prism-control-padding-inline-lg));
+}
+:host([variant='secondary']) {
+  --_bg: var(--prism-button-bg, var(--prism-glass-surface-solid-1));
+  --_bg-hover: var(--prism-button-bg-hover, var(--prism-glass-surface-solid-3));
+  --_color: var(--prism-button-color, var(--prism-color-text-primary));
+  --_border: var(--prism-button-border-color, var(--prism-control-border));
+  --_glow: none;
+}
+:host([variant='ghost']) {
+  --_bg: var(--prism-button-bg, transparent);
+  --_bg-hover: var(--prism-button-bg-hover, var(--prism-glass-surface-solid-1));
+  --_color: var(--prism-button-color, var(--prism-color-text-primary));
+  --_glow: none;
+}
+:host([variant='danger']) {
+  --_bg: var(--prism-button-bg, var(--prism-color-danger));
+  --_bg-hover: var(--prism-button-bg-hover, var(--prism-color-danger-hover));
+  --_color: var(--prism-button-color, var(--prism-color-danger-on));
+  --_glow: var(--prism-button-glow, var(--prism-shadow-glow-danger));
+}
+:host([variant='link']) {
+  --_bg: transparent;
+  --_bg-hover: transparent;
+  --_color: var(--prism-button-color, var(--prism-color-link));
+  --_glow: none;
+  --_pad: 0;
+}
+:host([full-width]) {
+  display: flex;
+}
+
+.base {
+  position: relative;
+  display: inline-flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  gap: var(--prism-button-gap, var(--prism-space-2));
+  min-block-size: max(var(--_height), var(--prism-target-min));
+  min-inline-size: var(--prism-target-min);
+  padding-inline: var(--_pad);
+  border: var(--prism-control-border-width) solid var(--_border);
+  border-radius: var(--prism-button-radius, var(--prism-radius-lg));
+  background: var(--_bg);
+  color: var(--_color);
+  font: inherit;
+  font-size: var(--prism-text-sm);
+  font-weight: var(--prism-weight-medium);
+  line-height: var(--prism-leading-tight);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  transition:
+    background-color var(--prism-duration-fast) var(--prism-ease-standard),
+    transform var(--prism-duration-fast) var(--prism-ease-standard);
+}
+:host([variant='link']) .base {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+:host([variant='secondary']) .base {
+  -webkit-backdrop-filter: blur(var(--prism-glass-blur-md)) saturate(var(--prism-glass-saturate));
+  backdrop-filter: blur(var(--prism-glass-blur-md)) saturate(var(--prism-glass-saturate));
+}
+:host([icon-only]) .base {
+  padding-inline: 0;
+  min-inline-size: max(var(--_height), var(--prism-target-min));
+}
+@media (hover: hover) {
+  .base:hover:not([disabled], [aria-disabled='true']) {
+    background: var(--_bg-hover);
+    box-shadow: var(--_glow);
+  }
+}
+.base:active:not([disabled], [aria-disabled='true']) {
+  transform: scale(var(--prism-state-active-scale));
+}
+:host([toggle][pressed]) .base {
+  background: var(--prism-color-primary-subtle);
+  color: var(--prism-color-on-primary-subtle);
+  border-color: var(--prism-color-primary);
+}
+.base[disabled],
+.base[aria-disabled='true']:not([aria-busy='true']) {
+  opacity: var(--prism-state-disabled-opacity);
+  cursor: not-allowed;
+}
+:host([loading]) .base {
+  cursor: progress;
+}
+:host([loading]) .label,
+:host([loading]) .suffix {
+  opacity: 0; /* not visibility: the label stays the accessible name while loading */
+}
+.spinner {
+  position: absolute;
+  inset-inline-start: 50%;
+  inset-block-start: 50%;
+  translate: -50% -50%;
+}
+.prefix,
+.suffix {
+  display: inline-flex;
+}
+::slotted(svg),
+::slotted(prism-icon) {
+  inline-size: 1.25em;
+  block-size: 1.25em;
+}
+/* Hit testing lands on the button itself (slotted text and icons are not separate targets). */
+.prefix,
+.label,
+.suffix,
+.spinner {
+  pointer-events: none;
+}
