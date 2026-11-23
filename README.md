@@ -18,7 +18,8 @@
   by itself. Form controls also re-emit native `input` / `change` from the host, so `v-model` and Angular
   `ngModel` / Reactive Forms work without adapters.
 - **Tokens only.** Components consume `var(--prism-*)` design tokens. The dark theme is the `.dark` class (or
-  `data-theme="dark"`) on any ancestor; there are no Tailwind `dark:` variants inside shadow DOM.
+  `data-theme="dark"`) on any ancestor; `data-theme="light"` forces light in a subtree and `data-theme="auto"`
+  follows `prefers-color-scheme`. There are no Tailwind `dark:` variants inside shadow DOM.
 - **Accessible glass.** Text sits only on surfaces that are at least 85% opaque in light and 90% in dark. Controls
   have a dedicated border with at least 3:1 contrast. The focus indicator is a double ring (white inner ring, black
   outer outline). Opaque fallbacks apply without `backdrop-filter` or with reduced transparency.

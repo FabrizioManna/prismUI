@@ -1,4 +1,6 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it } from 'vitest';
+import { cdp } from 'vitest/browser';
+import { PrismElement } from '../core/prism-element.js';
 
 const read = (name: string, el: Element = document.documentElement) =>
   getComputedStyle(el).getPropertyValue(name).trim();
@@ -54,5 +56,48 @@ describe('prism-tokens.css', () => {
     expect(getComputedStyle(probe).backgroundColor).toBe(getComputedStyle(opaque).backgroundColor);
     probe.remove();
     opaque.remove();
+  });
+
+  describe('themes', () => {
+    afterEach(async () => {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.removeAttribute('data-theme');
+      document.body.replaceChildren();
+      await cdp().send('Emulation.setEmulatedMedia', { features: [] });
+    });
+
+    const probe = (attrs: Record<string, string>, parent: Element = document.body) => {
+      const el = document.createElement('div');
+      for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
+      parent.append(el);
+      return el;
+    };
+
+    it('[data-theme="light"] restores light values inside a dark page', () => {
+      const lightText = read('--prism-color-text-primary');
+      document.documentElement.classList.add('dark');
+      const darkText = read('--prism-color-text-primary');
+      const light = probe({ 'data-theme': 'light' });
+      expect(darkText).not.toBe(lightText);
+      expect(read('--prism-color-text-primary', light)).toBe(lightText);
+      expect(read('color-scheme', light)).toBe('light');
+    });
+
+    it('[data-theme="auto"] follows prefers-color-scheme', async () => {
+      const auto = probe({ 'data-theme': 'auto' });
+      await cdp().send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-color-scheme', value: 'light' }] });
+      expect(read('color-scheme', auto)).toBe('light');
+      await cdp().send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-color-scheme', value: 'dark' }] });
+      expect(read('color-scheme', auto)).toBe('dark');
+      const dark = probe({ 'data-theme': 'dark' });
+      expect(read('--prism-color-text-primary', auto)).toBe(read('--prism-color-text-primary', dark));
+    });
+
+    it('shadow roots adopt the forced-colors / contrast surface classes', () => {
+      const css = (PrismElement.styles as unknown as { cssText?: string }[]).map((s) => s.cssText ?? '').join('');
+      expect(css).toContain('.prism-glass');
+      expect(css).toContain('forced-colors: active');
+      expect(css).toContain('::selection');
+    });
   });
 });

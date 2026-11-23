@@ -1,0 +1,40 @@
+/* ---------------------------------------------------------------------------------------------
+ * prismUI extensions (not in the Graphic Designer block; architecture.md §4.6 / §7.5).
+ * TODO(tokens): confirm with the Graphic Designer and move into visual-tokens.md.
+ * ------------------------------------------------------------------------------------------- */
+
+:root {
+  /* Hover states for intents other than primary (button danger, alert actions). */
+  --prism-color-success-hover: color-mix(in oklab, var(--prism-color-success), black 12%);
+  --prism-color-warning-hover: color-mix(in oklab, var(--prism-color-warning), black 12%);
+  --prism-color-danger-hover: color-mix(in oklab, var(--prism-color-danger), black 12%);
+  --prism-color-info-hover: color-mix(in oklab, var(--prism-color-info), black 12%);
+}
+.dark, [data-theme="dark"] {
+  --prism-color-success-hover: color-mix(in oklab, var(--prism-color-success), white 12%);
+  --prism-color-warning-hover: color-mix(in oklab, var(--prism-color-warning), white 12%);
+  --prism-color-danger-hover: color-mix(in oklab, var(--prism-color-danger), white 12%);
+  --prism-color-info-hover: color-mix(in oklab, var(--prism-color-info), white 12%);
+}
+
+/* Manual switches from the UX spec (architecture §7.5): same effect as prefers-reduced-transparency,
+   on the element that carries the attribute. */
+[data-prism-transparency="reduced"],
+[data-prism-effects="reduced"] {
+  --prism-glass-surface-solid-0: var(--prism-surface-opaque-0);
+  --prism-glass-surface-solid-1: var(--prism-surface-opaque-1);
+  --prism-glass-surface-solid-2: var(--prism-surface-opaque-2);
+  --prism-glass-surface-solid-3: var(--prism-surface-opaque-3);
+  --prism-glass-surface-solid-4: var(--prism-surface-opaque-4);
+  --prism-glass-slab: var(--prism-surface-opaque-0);
+  --prism-glass-surface-deco-0: var(--prism-surface-opaque-0);
+  --prism-glass-surface-deco-1: var(--prism-surface-opaque-1);
+  --prism-glass-surface-deco-2: var(--prism-surface-opaque-2);
+  --prism-glass-surface-deco-3: var(--prism-surface-opaque-3);
+  --prism-glass-surface-deco-4: var(--prism-surface-opaque-4);
+  --prism-glass-blur-sm: 0px;
+  --prism-glass-blur-md: 0px;
+  --prism-glass-blur-lg: 0px;
+  --prism-glass-blur-xl: 0px;
+  --prism-effect-noise-opacity: 0;
+}

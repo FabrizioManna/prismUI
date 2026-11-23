@@ -40,6 +40,7 @@
     "build": "vite build && npm run build:types && npm run analyze",
     "build:types": "node node_modules/typescript7/bin/tsc -p tsconfig.build.json",
     "analyze": "cem analyze --config custom-elements-manifest.config.mjs",
+    "tokens:sync": "node scripts/sync-tokens.mjs && node scripts/generate-token-types.mjs",
     "tokens:types": "node scripts/generate-token-types.mjs",
     "lint": "eslint . && node scripts/lint-styles.mjs && prettier --check .",
     "lint:fix": "eslint . --fix && prettier --write .",

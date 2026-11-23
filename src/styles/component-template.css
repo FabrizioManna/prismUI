@@ -12,4 +12,14 @@
  *
  * Rules: no `dark:` variants, no arbitrary values (`w-[342px]`), logical properties only (ms-*, ps-*).
  * Theme and state go through var(--prism-*) and :host([attr]) / :host(:state(x)) selectors.
+ *
+ * Stable classes for prefers-contrast / forced-colors (visual-tokens.md §5, rules in src/styles/surfaces.css,
+ * adopted by every shadow root through base.css). Put them on the element that paints the surface/control:
+ *   .prism-glass / .prism-glass-panel / .prism-glass-slab / .prism-surface-opaque   glass surfaces
+ *   .prism-modal .prism-drawer .prism-popover .prism-toast .prism-tooltip
+ *   .prism-navbar .prism-sidebar .prism-card                                        overlay and layout surfaces
+ *   .prism-button / button.prism-control                                            buttons (ButtonFace)
+ *   .prism-input .prism-field .prism-textarea .prism-select                         fields (Field/FieldText)
+ *   .prism-focusable / .prism-control                                               focus: 3px Highlight outline
+ *   .prism-checkbox-box .prism-switch-track/-thumb .prism-slider-track/-range .prism-progress-fill
  */

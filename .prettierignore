@@ -7,3 +7,5 @@ package-lock.json
 src/tokens/prism-tokens.css
 # Markdown docs are written by several agents; not enforced by prettier --check
 *.md
+src/styles/surfaces.css
+src/tokens/source/

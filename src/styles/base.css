@@ -2,6 +2,7 @@
  * Base stylesheet shared by every prismUI shadow root (one CSSStyleSheet for all instances).
  * Plain CSS on --prism-* tokens: no Tailwind preflight, no theme variants.
  */
+@import './surfaces.css';
 :host {
   box-sizing: border-box;
   font-family: var(--prism-font-sans);
