@@ -60,10 +60,11 @@ Only the Frontend Developer commits. QA and docs files are included in the next 
 ## Component rules
 
 1. **Controlled.** Never assign state properties from inside the component. Emit a request and let the consumer
-   update the property: `this.emitChange('value', proposed)` (form controls), `this.overlay.requestOpen('trigger')`
+   update the property: `this.emitChange('value', proposed, { reason })` (form controls), `this.overlay.requestOpen('trigger')`
    (overlays), `this.emit('prism-page-change', …)` (others). Internal state is ephemeral only: focus, hover, active
    index, uncommitted text (see `test/fixtures/prism-test-field.ts` for the reference pattern).
-2. **Events.** `prism-*`, `bubbles + composed`, not cancelable (except `prism-navigate`). No event for API changes.
+2. **Events.** Only the names in `src/core/events.ts`; `bubbles + composed`. Only `prism-open-request`,
+   `prism-close-request` (not with `forced`) and `prism-navigate` are cancelable. No event for API changes.
 3. **API naming.** Booleans default to `false` (use `no-*` names for default-on behaviour). Use `heading`, never
    `title`. Intent variants: `primary`, `neutral`, `info`, `success`, `warning`, `danger` (never `error`).
 4. **Registration.** `static tagName = 'prism-x'` and `define.ts` calling `PrismX.define()`. No `@customElement`.
@@ -75,7 +76,7 @@ Only the Frontend Developer commits. QA and docs files are included in the next 
 ## Before every commit
 
 ```bash
-npm run lint && npm run typecheck && npm run build && npm test
+npm run check   # lint + typecheck + tokens:contrast + build + test
 ```
 
 Conventional Commits in English (`feat:`, `fix:`, `chore:`, `test:`, `docs:`), imperative, lowercase, no final dot.
