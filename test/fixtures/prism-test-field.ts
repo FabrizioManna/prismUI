@@ -41,26 +41,26 @@ export class PrismTestField extends FocusableMixin(FormAssociatedMixin(PrismElem
 
   protected override resetToDefault(): void {
     this.draft = null;
-    this.emitChange('value', this.defaultValue, { reason: 'reset', source: 'reset', native: false });
+    this.emitChange('value', this.defaultValue, { reason: 'reset', native: false });
   }
 
   private onInput(event: Event) {
     event.stopPropagation(); // the inner native `input` is composed: the host re-emits a single one
     const input = event.target as HTMLInputElement;
     this.draft = input.value;
-    this.emitInput('value', input.value, 'keyboard');
+    this.emitInput('value', input.value);
   }
 
   private onChange(event: Event) {
     event.stopPropagation();
     const proposed = (event.target as HTMLInputElement).value;
     this.draft = null;
-    this.emitChange('value', proposed, { source: 'keyboard', reason: 'commit' });
+    this.emitChange('value', proposed, { reason: 'commit', native: 'change' });
   }
 
   override render() {
     return html`<label part="form-control" class="flex text-fg">
-      <span flex-col gap-1 text-sm part="label">${this.label}</span>
+      <span class="flex-col text-sm" gap-1 part="label">${this.label}</span>
       <input
         part="input"
         data-focus-target

@@ -45,15 +45,27 @@ describe('FormAssociatedMixin: controlled value pattern', () => {
     expect(innerInput(el).value).toBe('new');
   });
 
-  it('a canceled prism-change suppresses the native change (no state rollback needed)', async () => {
+  it('prism-change is not cancelable; the proposed value is readable during prism-change too', async () => {
     const el = await fixture<PrismTestField>(html`<prism-test-field label="Name" value="old"></prism-test-field>`);
-    el.addEventListener('prism-change', (e) => e.preventDefault());
+    let seen: { cancelable: boolean; value: string } | undefined;
+    el.addEventListener('prism-change', (e) => (seen = { cancelable: e.cancelable, value: el.value }));
     const events = recordEvents(el, ['prism-change', 'change']);
     await userEvent.fill(innerInput(el), 'new');
     innerInput(el).dispatchEvent(new Event('change'));
     await settle(el);
-    expect(events.types()).toEqual(['prism-change']);
-    expect(innerInput(el).value).toBe('old');
+    expect(seen).toEqual({ cancelable: false, value: 'new' });
+    expect(events.types()).toEqual(['prism-change', 'change']);
+    expect(el.value).toBe('old');
+  });
+
+  it('setFormValue follows the property synchronously (FormData right after the assignment)', async () => {
+    const form = await fixture<HTMLFormElement>(
+      html`<form><prism-test-field name="c" label="C" value="a"></prism-test-field></form>`,
+    );
+    const el = form.querySelector('prism-test-field')!;
+    await settle(el);
+    el.value = 'b';
+    expect(new FormData(form).get('c')).toBe('b');
   });
 
   it('does not emit events for changes made through the API', async () => {
@@ -96,7 +108,9 @@ describe('FormAssociatedMixin: controlled value pattern', () => {
     const el = form.querySelector('prism-test-field')!;
     await settle(el);
     const events = recordEvents(el, ['prism-change']);
+    const natives = recordEvents(el, ['input', 'change']);
     form.reset();
+    expect(natives.types()).toEqual([]); // no native events for reset (architecture.md §5.8)
     expect((events.log[0]!.event as CustomEvent).detail).toMatchObject({
       value: 'init',
       previousValue: 'typed',

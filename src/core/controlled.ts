@@ -38,8 +38,8 @@ export function withProposedValue<H extends ReactiveElement, K extends keyof H &
     enumerable: true,
     get: () => proposed,
     set: (v: H[K]) => {
+      proposed = v; // first: a synchronous setFormValue() in the setter must read the new value
       if (accessor?.set) accessor.set.call(host, v);
-      proposed = v;
     },
   });
   try {

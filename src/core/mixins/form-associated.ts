@@ -2,7 +2,7 @@ import { property, state } from 'lit/decorators.js';
 import type { PropertyValues } from 'lit';
 import type { PrismElement } from '../prism-element.js';
 import type { AbstractConstructor } from '../types.js';
-import type { PrismChangeReason, PrismInteractionSource } from '../events.js';
+import type { PrismChangeDetail, PrismChangeReason } from '../events.js';
 import { isSameValue, withProposedValue } from '../controlled.js';
 
 export interface PrismValidationResult {
@@ -13,13 +13,20 @@ export interface PrismValidationResult {
 
 const VALID: PrismValidationResult = { flags: {}, message: '' };
 
+/**
+ * Native events dispatched after `prism-change` (architecture.md §5.8):
+ * - `'input-change'`: discrete controls (checkbox, switch, radio, select…): `input` then `change`;
+ * - `'change'`: commit of text controls (the `input` already fired on every keystroke);
+ * - `false`: none (form reset/restore, like native controls).
+ */
+export type PrismNativeEvents = 'input-change' | 'change' | false;
+
 export interface PrismChangeOptions {
-  source?: PrismInteractionSource;
-  reason?: PrismChangeReason;
-  /** Extra fields merged into `detail` (e.g. `checked`, `indeterminate`). */
-  detail?: Record<string, unknown>;
-  /** Dispatch the native `change` after the request (default true; false for reset/restore, like native controls). */
-  native?: boolean;
+  reason: PrismChangeReason;
+  /** Extra fields merged into `detail` (e.g. `checked`, `indeterminate`, `pressed`). */
+  detail?: Partial<PrismChangeDetail>;
+  /** Default `'input-change'`. */
+  native?: PrismNativeEvents;
 }
 
 /**
@@ -53,8 +60,8 @@ export declare class FormAssociatedElement {
   protected validate(): PrismValidationResult;
   protected resetToDefault(): void;
   protected restoreFrom(state: FormDataEntryValue | FormData | null, mode: 'restore' | 'autocomplete'): void;
-  protected emitInput<K extends string>(key: K, proposed: unknown, source?: PrismInteractionSource): void;
-  protected emitChange<K extends string>(key: K, proposed: unknown, options?: PrismChangeOptions): boolean;
+  protected emitInput<K extends string>(key: K, proposed: unknown): void;
+  protected emitChange<K extends string>(key: K, proposed: unknown, options: PrismChangeOptions): boolean;
   /** Last state received through `formStateRestoreCallback` (readable by binding helpers after upgrade). */
   readonly restoredState: FormDataEntryValue | FormData | null;
 }
@@ -170,39 +177,44 @@ export const FormAssociatedMixin = <T extends AbstractConstructor<PrismElement>>
       else this.internals.setValidity({});
     }
 
-    /** User is typing/dragging: `prism-input` then native `input` (ux-spec.md §1.3). */
-    protected emitInput<K extends string>(key: K, proposed: unknown, source?: PrismInteractionSource): void {
-      this.emit('prism-input', { value: proposed, source });
-      withProposedValue(this as never, key as never, proposed as never, () =>
-        this.dispatchEvent(new Event('input', { bubbles: true, composed: true })),
-      );
+    /**
+     * Draft while typing/dragging: `prism-input` then native `input`, both dispatched while `host[key]`
+     * reads as the draft (architecture.md §5.8). Not cancelable.
+     */
+    protected emitInput<K extends string>(key: K, proposed: unknown): void {
+      withProposedValue(this as never, key as never, proposed as never, () => {
+        this.emit('prism-input', { value: proposed });
+        this.dispatchEvent(new Event('input', { bubbles: true, composed: true }));
+      });
     }
 
     /**
-     * Requests a new value: `prism-change` (cancelable) then, unless canceled, native `change` while
-     * `host[key]` reads as the proposal. Never assigns `this[key]`.
-     * @returns `false` if nothing was emitted (same value) or the request was canceled.
+     * Proposes a new value: `prism-change` (not cancelable) then the native events of `options.native`,
+     * all dispatched while `host[key]` reads as the proposal. Never assigns `this[key]`: the owner
+     * accepts by setting the property, refuses by not setting it.
+     * @returns `false` if nothing was emitted (same value and no extra detail).
      */
-    protected emitChange<K extends string>(key: K, proposed: unknown, options: PrismChangeOptions = {}): boolean {
+    protected emitChange<K extends string>(key: K, proposed: unknown, options: PrismChangeOptions): boolean {
       const previousValue = (this as unknown as Record<string, unknown>)[key];
       if (isSameValue(previousValue, proposed) && !options.detail) return false;
-      const accepted = this.emit('prism-change', {
-        value: proposed,
-        previousValue,
-        ...(options.source ? { source: options.source } : {}),
-        reason: options.reason ?? 'user',
-        ...options.detail,
+      const native = options.native ?? 'input-change';
+      withProposedValue(this as never, key as never, proposed as never, () => {
+        this.emit('prism-change', { value: proposed, previousValue, reason: options.reason, ...options.detail });
+        if (native === 'input-change') this.dispatchEvent(new Event('input', { bubbles: true, composed: true }));
+        if (native) this.dispatchEvent(new Event('change', { bubbles: true }));
       });
-      if (!accepted) {
-        this.requestUpdate();
-        return false;
-      }
-      if (options.native !== false) {
-        withProposedValue(this as never, key as never, proposed as never, () =>
-          this.dispatchEvent(new Event('change', { bubbles: true })),
-        );
-      }
       return true;
+    }
+
+    /**
+     * `setFormValue()` follows the property synchronously (architecture.md §5.8), so a `new FormData(form)`
+     * right after the owner's assignment already sees the new value. `updated()` confirms it with validity.
+     */
+    override requestUpdate(name?: PropertyKey, oldValue?: unknown, options?: object): void {
+      super.requestUpdate(name as never, oldValue, options as never);
+      if (name !== undefined && this.hasUpdated && this.internals) {
+        this.internals.setFormValue(this.isDisabled ? null : this.formValue(), this.formState());
+      }
     }
 
     formResetCallback(): void {

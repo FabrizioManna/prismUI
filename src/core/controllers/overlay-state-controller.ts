@@ -7,7 +7,7 @@ type OverlayHost = ReactiveControllerHost & HTMLElement & { open: boolean };
 /**
  * Controlled open/close for overlays (modal, dropdown, menu, tooltip, pickers...), ux-spec.md §1.3.
  *
- * - `requestOpen(reason)` / `requestClose(reason)` only emit `prism-open-request` / `prism-close-request`.
+ * - `requestOpen(reason)` / `requestClose(reason)` only emit (cancelable) `prism-open-request` / `prism-close-request`.
  *   The overlay opens or closes when the consumer updates `open`.
  * - When `open` actually changes (from any source), emits `prism-open` / `prism-close` after the update,
  *   with the reason of the last request or `'property'`.
@@ -40,7 +40,7 @@ export class OverlayStateController implements ReactiveController {
       ...(options.returnValue !== undefined ? { returnValue: options.returnValue } : {}),
       ...(options.forced ? { forced: true } : {}),
     };
-    return emit(this.host, 'prism-close-request', detail, options.forced ? { cancelable: false } : {});
+    return emit(this.host, 'prism-close-request', detail); // forced => not cancelable (events.ts)
   }
 
   hostConnected(): void {
