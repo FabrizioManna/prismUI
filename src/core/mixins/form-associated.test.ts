@@ -45,6 +45,17 @@ describe('FormAssociatedMixin: controlled value pattern', () => {
     expect(innerInput(el).value).toBe('new');
   });
 
+  it('a canceled prism-change suppresses the native change (no state rollback needed)', async () => {
+    const el = await fixture<PrismTestField>(html`<prism-test-field label="Name" value="old"></prism-test-field>`);
+    el.addEventListener('prism-change', (e) => e.preventDefault());
+    const events = recordEvents(el, ['prism-change', 'change']);
+    await userEvent.fill(innerInput(el), 'new');
+    innerInput(el).dispatchEvent(new Event('change'));
+    await settle(el);
+    expect(events.types()).toEqual(['prism-change']);
+    expect(innerInput(el).value).toBe('old');
+  });
+
   it('does not emit events for changes made through the API', async () => {
     const el = await fixture<PrismTestField>(html`<prism-test-field label="Name"></prism-test-field>`);
     const events = recordEvents(el, ['prism-change', 'prism-input', 'change', 'input']);
@@ -86,7 +97,11 @@ describe('FormAssociatedMixin: controlled value pattern', () => {
     await settle(el);
     const events = recordEvents(el, ['prism-change']);
     form.reset();
-    expect((events.log[0]!.event as CustomEvent).detail).toMatchObject({ value: 'init', previousValue: 'typed' });
+    expect((events.log[0]!.event as CustomEvent).detail).toMatchObject({
+      value: 'init',
+      previousValue: 'typed',
+      reason: 'reset',
+    });
     expect(el.value).toBe('typed');
   });
 });
@@ -108,5 +123,19 @@ describe('FocusableMixin', () => {
     expect(style.outlineColor).toBe('rgb(0, 0, 0)');
     expect(style.outlineWidth).toBe('2px');
     expect(style.boxShadow).toContain('rgb(255, 255, 255)');
+  });
+});
+
+describe('ValidationController (via test field)', () => {
+  it('marks the field touched on form submit (invalid event)', async () => {
+    const form = await fixture<HTMLFormElement>(
+      html`<form><prism-test-field name="n" label="N" required></prism-test-field></form>`,
+    );
+    const el = form.querySelector('prism-test-field')!;
+    await settle(el);
+    expect(el.validation.showError).toBe(false);
+    form.checkValidity();
+    await settle(el);
+    expect(el.validation.showError).toBe(true);
   });
 });

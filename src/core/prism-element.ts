@@ -2,6 +2,7 @@ import { LitElement, type CSSResultGroup, type CSSResultOrNative } from 'lit';
 import { baseStyles } from '../styles/base-styles.js';
 import { emit, type PrismEventDetailMap, type PrismEventInit, type PrismEventName } from './events.js';
 import { hoistPropertyRules } from './global-styles.js';
+import { PrismAnnouncer } from './a11y/announcer.js';
 
 /**
  * Base class of every prismUI component.
@@ -39,6 +40,12 @@ export abstract class PrismElement extends LitElement {
       if (cssText.includes('@property')) hoistPropertyRules(cssText);
     }
     return finalized;
+  }
+
+  override connectedCallback(): void {
+    super.connectedCallback();
+    // Live regions must exist before the first announcement (ux-spec §1.9).
+    PrismAnnouncer.ensure();
   }
 
   /** Dispatches a typed prism-* event (bubbles + composed). */

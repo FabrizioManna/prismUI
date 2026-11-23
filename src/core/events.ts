@@ -1,16 +1,28 @@
 /**
- * Typed prism-* events. Every event is `bubbles + composed` and, per the UX spec (§1.3), NOT cancelable:
- * state events are *requests*; the consumer accepts one by updating the property, rejects it by doing nothing.
- * The only cancelable event is `prism-navigate`.
+ * Typed prism-* events. Every event is `bubbles + composed`.
+ *
+ * Classes (architecture.md P.2, Manager decision 23/11):
+ * - **requests** (`prism-change`, `prism-*-change`, `prism-open-request`, `prism-close-request`, `prism-navigate`,
+ *   `prism-remove`, …) are cancelable. The component never applies a request, so `preventDefault()` only blocks
+ *   native behaviour and internal previews (dialog `cancel`, link navigation, native events), never rolls back state.
+ *   Exception: `prism-close-request` with `detail.forced: true` is not cancelable (the browser already closed).
+ * - **drafts** (`prism-input`, `prism-search`) and **notifications** (`prism-open`, `prism-close`) are not cancelable.
  */
 
-export type PrismInteractionSource = 'pointer' | 'keyboard' | 'touch' | 'api';
+export type PrismInteractionSource = 'pointer' | 'keyboard' | 'touch' | 'api' | 'reset' | 'restore' | 'autocomplete';
+
+/** Why a value request was emitted. */
+export type PrismChangeReason =
+  'user' | 'commit' | 'enter' | 'clear' | 'reset' | 'restore' | 'autocomplete' | 'select-all';
 
 /** Request to change a value or selection (`prism-change`). The property does not change by itself. */
 export interface PrismChangeDetail<T = unknown> {
   value: T;
   previousValue: T;
   source?: PrismInteractionSource;
+  reason?: PrismChangeReason;
+  /** Extra state carried by some components (checkbox: `checked`, `indeterminate`; button: `pressed`). */
+  [extra: string]: unknown;
 }
 
 /** Continuous value proposal while typing or dragging (`prism-input`). */
@@ -35,12 +47,28 @@ export type PrismOverlayReason =
   | 'pointer'
   | 'focus'
   | 'blur'
+  | 'find'
+  | 'property'
   | 'api';
 
 /** Detail of `prism-open-request`, `prism-close-request`, `prism-open`, `prism-close`. */
 export interface PrismOverlayDetail {
   reason: PrismOverlayReason;
   returnValue?: string;
+  /** The browser already closed the overlay: the request is not cancelable and the owner must set `open = false`. */
+  forced?: boolean;
+}
+
+export interface PrismSearchDetail {
+  query: string;
+}
+
+export interface PrismClearDetail {
+  previousValue: unknown;
+}
+
+export interface PrismRemoveDetail {
+  value: unknown;
 }
 
 export type PrismSortDirection = 'ascending' | 'descending' | 'none';
@@ -101,12 +129,15 @@ export interface PrismEventDetailMap {
   'prism-action': PrismActionDetail;
   'prism-invalid': PrismInvalidDetail;
   'prism-navigate': PrismNavigateDetail;
+  'prism-search': PrismSearchDetail;
+  'prism-clear': PrismClearDetail;
+  'prism-remove': PrismRemoveDetail;
 }
 
 export type PrismEventName = keyof PrismEventDetailMap;
 
 export interface PrismEventInit {
-  /** Only `prism-navigate` is cancelable by default; override for documented exceptions. */
+  /** Requests are cancelable by default; override for documented exceptions (forced close). */
   cancelable?: boolean;
   bubbles?: boolean;
   composed?: boolean;
@@ -128,10 +159,26 @@ declare global {
     'prism-action': CustomEvent<PrismActionDetail>;
     'prism-invalid': CustomEvent<PrismInvalidDetail>;
     'prism-navigate': CustomEvent<PrismNavigateDetail>;
+    'prism-search': CustomEvent<PrismSearchDetail>;
+    'prism-clear': CustomEvent<PrismClearDetail>;
+    'prism-remove': CustomEvent<PrismRemoveDetail>;
   }
 }
 
-const CANCELABLE_BY_DEFAULT: ReadonlySet<string> = new Set(['prism-navigate']);
+/** Request events: cancelable by default (architecture.md P.2). */
+export const PRISM_REQUEST_EVENTS: ReadonlySet<string> = new Set([
+  'prism-change',
+  'prism-open-request',
+  'prism-close-request',
+  'prism-sort-change',
+  'prism-filter-change',
+  'prism-page-change',
+  'prism-selection-change',
+  'prism-view-change',
+  'prism-navigate',
+  'prism-remove',
+  'prism-clear',
+]);
 
 /**
  * Dispatches a typed prism-* CustomEvent from `target` (bubbles + composed).
@@ -147,7 +194,7 @@ export function emit<K extends PrismEventName>(
     detail,
     bubbles: init.bubbles ?? true,
     composed: init.composed ?? true,
-    cancelable: init.cancelable ?? CANCELABLE_BY_DEFAULT.has(name),
+    cancelable: init.cancelable ?? PRISM_REQUEST_EVENTS.has(name),
   });
   return target.dispatchEvent(event);
 }

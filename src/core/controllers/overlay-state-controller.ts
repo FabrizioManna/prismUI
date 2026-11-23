@@ -10,7 +10,7 @@ type OverlayHost = ReactiveControllerHost & HTMLElement & { open: boolean };
  * - `requestOpen(reason)` / `requestClose(reason)` only emit `prism-open-request` / `prism-close-request`.
  *   The overlay opens or closes when the consumer updates `open`.
  * - When `open` actually changes (from any source), emits `prism-open` / `prism-close` after the update,
- *   with the reason of the last request or `'api'`.
+ *   with the reason of the last request or `'property'`.
  */
 export class OverlayStateController implements ReactiveController {
   private lastRequestReason: PrismOverlayReason | undefined;
@@ -20,16 +20,27 @@ export class OverlayStateController implements ReactiveController {
     host.addController(this);
   }
 
-  requestOpen(reason: PrismOverlayReason): void {
-    if (this.host.open) return;
+  /** Emits `prism-open-request` (cancelable). @returns false if already open or canceled. */
+  requestOpen(reason: PrismOverlayReason): boolean {
+    if (this.host.open) return false;
     this.lastRequestReason = reason;
-    emit(this.host, 'prism-open-request', { reason });
+    return emit(this.host, 'prism-open-request', { reason });
   }
 
-  requestClose(reason: PrismOverlayReason, returnValue?: string): void {
-    if (!this.host.open) return;
+  /**
+   * Emits `prism-close-request`. With `forced` (the browser already closed a dialog) the request is not
+   * cancelable: the owner must set `open = false`; the component re-syncs with the property meanwhile.
+   * @returns false if already closed or canceled.
+   */
+  requestClose(reason: PrismOverlayReason, options: { returnValue?: string; forced?: boolean } = {}): boolean {
+    if (!this.host.open) return false;
     this.lastRequestReason = reason;
-    emit(this.host, 'prism-close-request', returnValue === undefined ? { reason } : { reason, returnValue });
+    const detail = {
+      reason,
+      ...(options.returnValue !== undefined ? { returnValue: options.returnValue } : {}),
+      ...(options.forced ? { forced: true } : {}),
+    };
+    return emit(this.host, 'prism-close-request', detail, options.forced ? { cancelable: false } : {});
   }
 
   hostConnected(): void {
@@ -44,7 +55,7 @@ export class OverlayStateController implements ReactiveController {
     }
     if (open === this.previousOpen) return;
     this.previousOpen = open;
-    const reason = this.lastRequestReason ?? 'api';
+    const reason = this.lastRequestReason ?? 'property';
     this.lastRequestReason = undefined;
     emit(this.host, open ? 'prism-open' : 'prism-close', { reason });
   }

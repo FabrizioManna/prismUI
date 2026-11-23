@@ -4,6 +4,7 @@ import { live } from 'lit/directives/live.js';
 import { PrismElement } from '../../src/core/prism-element.js';
 import { FormAssociatedMixin, type PrismValidationResult } from '../../src/core/mixins/form-associated.js';
 import { FocusableMixin } from '../../src/core/mixins/focusable.js';
+import { ValidationController } from '../../src/core/controllers/validation-controller.js';
 import styles from './prism-test-field.css?inline';
 
 /**
@@ -23,6 +24,8 @@ export class PrismTestField extends FocusableMixin(FormAssociatedMixin(PrismElem
   @property({ attribute: 'default-value' }) defaultValue = '';
   @property() label = '';
 
+  readonly validation = new ValidationController(this, () => this.internals);
+
   /** Ephemeral: text typed and not yet committed. */
   @state() private draft: string | null = null;
 
@@ -38,7 +41,7 @@ export class PrismTestField extends FocusableMixin(FormAssociatedMixin(PrismElem
 
   protected override resetToDefault(): void {
     this.draft = null;
-    this.emitChange('value', this.defaultValue);
+    this.emitChange('value', this.defaultValue, { reason: 'reset', source: 'reset', native: false });
   }
 
   private onInput(event: Event) {
@@ -52,7 +55,7 @@ export class PrismTestField extends FocusableMixin(FormAssociatedMixin(PrismElem
     event.stopPropagation();
     const proposed = (event.target as HTMLInputElement).value;
     this.draft = null;
-    this.emitChange('value', proposed, 'keyboard');
+    this.emitChange('value', proposed, { source: 'keyboard', reason: 'commit' });
   }
 
   override render() {
@@ -69,7 +72,7 @@ export class PrismTestField extends FocusableMixin(FormAssociatedMixin(PrismElem
         ?disabled=${this.isDisabled}
         ?readonly=${this.readonly}
         ?required=${this.required}
-        aria-invalid=${this.invalid ? 'true' : 'false'}
+        aria-invalid=${this.validation.showError ? 'true' : 'false'}
         @input=${this.onInput}
         @change=${this.onChange}
       />

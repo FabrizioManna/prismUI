@@ -2,7 +2,7 @@ import { property, state } from 'lit/decorators.js';
 import type { PropertyValues } from 'lit';
 import type { PrismElement } from '../prism-element.js';
 import type { AbstractConstructor } from '../types.js';
-import type { PrismInteractionSource } from '../events.js';
+import type { PrismChangeReason, PrismInteractionSource } from '../events.js';
 import { isSameValue, withProposedValue } from '../controlled.js';
 
 export interface PrismValidationResult {
@@ -12,6 +12,15 @@ export interface PrismValidationResult {
 }
 
 const VALID: PrismValidationResult = { flags: {}, message: '' };
+
+export interface PrismChangeOptions {
+  source?: PrismInteractionSource;
+  reason?: PrismChangeReason;
+  /** Extra fields merged into `detail` (e.g. `checked`, `indeterminate`). */
+  detail?: Record<string, unknown>;
+  /** Dispatch the native `change` after the request (default true; false for reset/restore, like native controls). */
+  native?: boolean;
+}
 
 /**
  * Public + protected surface added by `FormAssociatedMixin` (declared separately so that declaration
@@ -45,7 +54,9 @@ export declare class FormAssociatedElement {
   protected resetToDefault(): void;
   protected restoreFrom(state: FormDataEntryValue | FormData | null, mode: 'restore' | 'autocomplete'): void;
   protected emitInput<K extends string>(key: K, proposed: unknown, source?: PrismInteractionSource): void;
-  protected emitChange<K extends string>(key: K, proposed: unknown, source?: PrismInteractionSource): boolean;
+  protected emitChange<K extends string>(key: K, proposed: unknown, options?: PrismChangeOptions): boolean;
+  /** Last state received through `formStateRestoreCallback` (readable by binding helpers after upgrade). */
+  readonly restoredState: FormDataEntryValue | FormData | null;
 }
 
 let warnedNoInternals = false;
@@ -74,6 +85,8 @@ export const FormAssociatedMixin = <T extends AbstractConstructor<PrismElement>>
     @state() protected formDisabled = false;
 
     private customValidityMessage = '';
+
+    restoredState: FormDataEntryValue | FormData | null = null;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     constructor(...args: any[]) {
@@ -129,11 +142,11 @@ export const FormAssociatedMixin = <T extends AbstractConstructor<PrismElement>>
       return VALID;
     }
     /**
-     * Called on `form.reset()`. Controlled components must not assign their own state: the recommended
-     * implementation emits a change request towards the default value (open point, see CONTRIBUTING.md).
+     * Called on `form.reset()`. Controlled components never assign their own state: implementations emit
+     * `prism-change` towards the default with `reason: 'reset'` (Manager decision, architecture.md §5.3).
      */
     protected resetToDefault(): void {}
-    /** Called on history/bfcache restore or autofill. Same controlled rule as `resetToDefault()`. */
+    /** Called on history/bfcache restore or autofill: emit `prism-change` with `reason: 'restore'`. */
     protected restoreFrom(_state: FormDataEntryValue | FormData | null, _mode: 'restore' | 'autocomplete'): void {}
 
     protected override updated(changed: PropertyValues): void {
@@ -166,16 +179,29 @@ export const FormAssociatedMixin = <T extends AbstractConstructor<PrismElement>>
     }
 
     /**
-     * User committed a value: `prism-change` then native `change`. Does not assign `this[key]`.
-     * @returns `false` if the proposal equals the current value (nothing emitted).
+     * Requests a new value: `prism-change` (cancelable) then, unless canceled, native `change` while
+     * `host[key]` reads as the proposal. Never assigns `this[key]`.
+     * @returns `false` if nothing was emitted (same value) or the request was canceled.
      */
-    protected emitChange<K extends string>(key: K, proposed: unknown, source?: PrismInteractionSource): boolean {
+    protected emitChange<K extends string>(key: K, proposed: unknown, options: PrismChangeOptions = {}): boolean {
       const previousValue = (this as unknown as Record<string, unknown>)[key];
-      if (isSameValue(previousValue, proposed)) return false;
-      this.emit('prism-change', { value: proposed, previousValue, source });
-      withProposedValue(this as never, key as never, proposed as never, () =>
-        this.dispatchEvent(new Event('change', { bubbles: true })),
-      );
+      if (isSameValue(previousValue, proposed) && !options.detail) return false;
+      const accepted = this.emit('prism-change', {
+        value: proposed,
+        previousValue,
+        ...(options.source ? { source: options.source } : {}),
+        reason: options.reason ?? 'user',
+        ...options.detail,
+      });
+      if (!accepted) {
+        this.requestUpdate();
+        return false;
+      }
+      if (options.native !== false) {
+        withProposedValue(this as never, key as never, proposed as never, () =>
+          this.dispatchEvent(new Event('change', { bubbles: true })),
+        );
+      }
       return true;
     }
 
@@ -186,6 +212,7 @@ export const FormAssociatedMixin = <T extends AbstractConstructor<PrismElement>>
       this.formDisabled = disabled;
     }
     formStateRestoreCallback(state: FormDataEntryValue | FormData | null, mode: 'restore' | 'autocomplete'): void {
+      this.restoredState = state;
       this.restoreFrom(state, mode);
     }
     formAssociatedCallback(_form: HTMLFormElement | null): void {
